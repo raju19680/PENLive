@@ -1,0 +1,64 @@
+name: Build PENLIVE Windows EXE
+
+on:
+  push:
+    branches: [ main, master ]
+  workflow_dispatch:
+
+jobs:
+  build-windows:
+    name: Build on Windows
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Rust
+        uses: dtolnay/rust-toolchain@stable
+        with:
+          targets: x86_64-pc-windows-msvc
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Install npm dependencies
+        run: npm install
+
+      - name: Install Tauri CLI
+        run: npm install -D @tauri-apps/cli
+
+      - name: Build PENLIVE
+        run: npm run tauri build
+        continue-on-error: true
+
+      - name: Find build artifacts
+        if: always()
+        shell: pwsh
+        run: |
+          Write-Host "=== Searching for EXE files ==="
+          Get-ChildItem -Path . -Recurse -Filter "*.exe" -ErrorAction SilentlyContinue | Format-Table FullName, Length
+          Write-Host "=== Searching for MSI files ==="
+          Get-ChildItem -Path . -Recurse -Filter "*.msi" -ErrorAction SilentlyContinue | Format-Table FullName, Length
+
+      - name: Upload EXE
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: PENLIVE-build-output
+          path: |
+            src-tauri/target/release/penlive.exe
+            src-tauri/target/release/**/*.exe
+            src-tauri/target/release/**/*.msi
+          if-no-files-found: warn
+
+      - name: Upload build logs on failure
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-logs
+          path: |
+            src-tauri/target/release/build/
+            npm-debug.log*
