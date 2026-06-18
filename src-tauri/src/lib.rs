@@ -5,7 +5,8 @@ use serde::{Deserialize, Serialize};
 use std::fs;
 use std::path::PathBuf;
 use sysinfo::{System, Disks};
-use tauri::{Manager, WebviewWindowBuilder, WebviewUrl};
+use tauri::{Manager, WebviewWindowBuilder, WebviewUrl, Emitter};
+use tauri_plugin_global_shortcut::{GlobalShortcutExt, Code, Modifiers, Shortcut};
 
 // ============================================================
 //  APP STATE
@@ -25,7 +26,7 @@ fn get_system_info() -> SystemInfo {
     let mut sys = System::new_all();
     sys.refresh_all();
 
-    let cpu_usage = sys.global_cpu_usage();
+    let cpu_usage = sys.global_cpu_info().cpu_usage();
     let total_memory = sys.total_memory();
     let used_memory = sys.used_memory();
 
@@ -82,7 +83,7 @@ fn save_recording(
         .ok_or("Save cancelled")?;
 
     let path_str = path.to_string();
-    fs::write(&path, &bytes).map_err(|e| e.to_string())?;
+    fs::write(&path_str, &bytes).map_err(|e| e.to_string())?;
     Ok(path_str)
 }
 
@@ -103,7 +104,7 @@ fn save_screenshot(
         .ok_or("Save cancelled")?;
 
     let path_str = path.to_string();
-    fs::write(&path, &bytes).map_err(|e| e.to_string())?;
+    fs::write(&path_str, &bytes).map_err(|e| e.to_string())?;
     Ok(path_str)
 }
 
@@ -181,21 +182,22 @@ fn close_overlay_windows(app: tauri::AppHandle) -> Result<(), String> {
 fn list_monitors(window: tauri::WebviewWindow) -> Vec<MonitorInfo> {
     window
         .available_monitors()
-        .map_err(|e| {
-            eprintln!("Monitor list error: {}", e);
-            Vec::new()
+        .map(|monitors| {
+            monitors
+                .iter()
+                .map(|m| MonitorInfo {
+                    name: m.name()
+                        .map(|s| s.to_string())
+                        .unwrap_or_default(),
+                    width: m.size().width,
+                    height: m.size().height,
+                    scale_factor: m.scale_factor(),
+                    position_x: m.position().x,
+                    position_y: m.position().y,
+                })
+                .collect()
         })
-        .unwrap_or_default()
-        .iter()
-        .map(|m| MonitorInfo {
-            name: m.name().unwrap_or_default().to_string(),
-            width: m.size().width,
-            height: m.size().height,
-            scale_factor: m.scale_factor(),
-            position_x: m.position().x,
-            position_y: m.position().y,
-        })
-        .collect()
+        .unwrap_or_else(|_| Vec::new())
 }
 
 #[tauri::command]
@@ -297,6 +299,34 @@ struct AppInfo {
 }
 
 // ============================================================
+//  GLOBAL SHORTCUTS
+// ============================================================
+
+fn register_global_shortcuts(app: &tauri::AppHandle) -> Result<(), String> {
+    let shortcuts = [
+        (Code::KeyP, "toggle-pen"),
+        (Code::KeyH, "toggle-highlighter"),
+        (Code::KeyE, "toggle-eraser"),
+        (Code::KeyR, "toggle-recording"),
+        (Code::KeyS, "take-screenshot"),
+        (Code::KeyO, "toggle-overlay"),
+        (Code::KeyZ, "undo"),
+        (Code::KeyY, "redo"),
+    ];
+
+    for (code, action) in shortcuts {
+        let sc = Shortcut::new(Some(Modifiers::CONTROL | Modifiers::SHIFT), code);
+        let action_str = action.to_string();
+        app.global_shortcut()
+            .on_shortcut(sc, move |app_handle, _shortcut, _event| {
+                let _ = app_handle.emit(&action_str, ());
+            })
+            .map_err(|e| e.to_string())?;
+    }
+    Ok(())
+}
+
+// ============================================================
 //  MAIN RUN
 // ============================================================
 
@@ -308,6 +338,7 @@ pub fn run() {
         .plugin(tauri_plugin_shell::init())
         .plugin(tauri_plugin_window_state::Builder::new().build())
         .plugin(tauri_plugin_os::init())
+        .plugin(tauri_plugin_global_shortcut::Builder::new().build())
         .manage(AppState::default())
         .setup(|app| {
             #[cfg(debug_assertions)]
@@ -315,6 +346,9 @@ pub fn run() {
                 if let Some(window) = app.get_webview_window("main") {
                     window.open_devtools();
                 }
+            }
+            if let Err(e) = register_global_shortcuts(app.handle()) {
+                eprintln!("Hotkey registration failed: {}", e);
             }
             Ok(())
         })
