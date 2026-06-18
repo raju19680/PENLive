@@ -33,7 +33,7 @@
   },
   "bundle": {
     "active": true,
-    "targets": ["nsis", "msi"],
+    "targets": ["nsis"],
     "publisher": "Er. Raju Kumawat",
     "copyright": "Copyright (c) 2026 Er. Raju Kumawat. All rights reserved.",
     "category": "Education",
@@ -53,9 +53,6 @@
         "installMode": "currentUser",
         "languages": ["English"],
         "displayLanguageSelector": false
-      },
-      "msi": {
-        "installerIcon": "icons/icon.ico"
       },
       "webviewInstallMode": {
         "type": "downloadBootstrapper"
