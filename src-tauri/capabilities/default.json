@@ -24,9 +24,11 @@
     "core:webview:allow-create-webview-window",
     "dialog:default",
     "fs:default",
-    "fs:allow-app-data-read",
-    "fs:allow-app-data-write",
+    "fs:allow-appdata-read",
+    "fs:allow-appdata-write",
     "shell:allow-open",
-    "os:default"
+    "os:default",
+    "global-shortcut:allow-register",
+    "global-shortcut:allow-unregister"
   ]
 }
