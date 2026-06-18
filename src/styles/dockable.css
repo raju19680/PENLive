@@ -1,0 +1,443 @@
+/* ============================================================
+   PENLIVE - Dockable Sidebar Styles
+   Copyright (c) 2026 Er. Raju Kumawat. All rights reserved.
+   ============================================================ */
+
+/* ============================================================
+   DOCKABLE BASE — both toolbar and panel
+   ============================================================ */
+.dockable {
+  transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1),
+              opacity 200ms,
+              width 200ms,
+              height 200ms;
+}
+
+.dockable.fully-hidden {
+  display: none !important;
+}
+
+/* ============================================================
+   DOCK HEADER (drag handle + pin + close)
+   ============================================================ */
+.dock-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 4px 8px;
+  background: var(--color-surface-alt);
+  border-bottom: 1px solid var(--color-border);
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  color: var(--color-text-secondary);
+  -webkit-app-region: no-drag;
+  user-select: none;
+}
+
+.dock-header__drag {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  cursor: grab;
+  flex: 1;
+  color: var(--color-text-tertiary);
+}
+
+.dock-header__drag:hover {
+  color: var(--color-primary);
+}
+
+.dock-header__drag:active {
+  cursor: grabbing;
+}
+
+.dock-header__title {
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-size: 10px;
+}
+
+.dock-header__actions {
+  display: flex;
+  gap: 2px;
+}
+
+.dock-btn {
+  width: 22px;
+  height: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--r-sm);
+  background: transparent;
+  color: var(--color-text-tertiary);
+  cursor: pointer;
+  transition: all 100ms;
+}
+
+.dock-btn:hover {
+  background: var(--color-surface);
+  color: var(--color-text);
+}
+
+.dock-btn.dock-pin.pinned {
+  color: var(--color-primary);
+  background: var(--color-primary-light);
+}
+
+.dock-btn.dock-pin:not(.pinned) {
+  opacity: 0.5;
+}
+
+.dock-btn.dock-close:hover {
+  background: var(--color-rec);
+  color: #fff;
+}
+
+/* ============================================================
+   DOCK POSITIONS — LEFT (default)
+   ============================================================ */
+.toolbar.dockable.dock-left {
+  /* Default position — uses grid */
+}
+
+/* ============================================================
+   DOCK POSITIONS — RIGHT
+   ============================================================ */
+.toolbar.dockable.dock-right {
+  grid-column: 3;
+  grid-row: 2;
+  border-left: 1px solid var(--color-border);
+  border-right: none;
+}
+
+/* Note: When toolbar docks right, the panel moves to left via JS
+   (dockable.js handles this by swapping grid positions) */
+
+/* ============================================================
+   DOCK POSITIONS — TOP / BOTTOM (horizontal layout)
+   ============================================================ */
+.toolbar.dockable.dock-top,
+.toolbar.dockable.dock-bottom {
+  width: 100%;
+  height: auto;
+  max-height: 120px;
+  flex-direction: row;
+  flex-wrap: wrap;
+  border-right: none;
+  border-bottom: 1px solid var(--color-border);
+  overflow-y: auto;
+}
+
+.toolbar.dockable.dock-top {
+  grid-row: 1;
+  grid-column: 1 / -1;
+}
+
+.toolbar.dockable.dock-bottom {
+  grid-row: 3;
+  grid-column: 1 / -1;
+}
+
+.toolbar.dockable.dock-top .toolbar__section,
+.toolbar.dockable.dock-bottom .toolbar__section {
+  width: auto;
+  flex-direction: row;
+  align-items: center;
+  gap: 4px;
+}
+
+.toolbar.dockable.dock-top .toolbar__group-label,
+.toolbar.dockable.dock-bottom .toolbar__group-label {
+  width: auto;
+  margin: 0 4px 0 0;
+}
+
+.toolbar.dockable.dock-top .tool-group,
+.toolbar.dockable.dock-bottom .tool-group {
+  flex-direction: row;
+}
+
+.toolbar.dockable.dock-top .color-picker,
+.toolbar.dockable.dock-bottom .color-picker {
+  flex-direction: row;
+  align-items: center;
+}
+
+.toolbar.dockable.dock-top .color-swatches,
+.toolbar.dockable.dock-bottom .color-swatches {
+  grid-template-columns: repeat(6, 1fr);
+}
+
+.toolbar.dockable.dock-top .brush-size,
+.toolbar.dockable.dock-bottom .brush-size {
+  width: 120px;
+  flex-direction: row;
+}
+
+/* ============================================================
+   FLOATING MODE
+   ============================================================ */
+.dockable.dock-floating {
+  position: absolute !important;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--r-lg);
+  box-shadow: var(--shadow-lg);
+  z-index: 200 !important;
+  max-height: calc(100vh - 120px);
+  overflow-y: auto;
+}
+
+.dockable.dock-floating.dragging {
+  opacity: 0.85;
+  box-shadow: 0 16px 40px rgba(20, 35, 65, 0.25);
+  cursor: grabbing;
+}
+
+/* ============================================================
+   AUTO-HIDE (slide off when not hovered)
+   ============================================================ */
+.dockable.auto-hide {
+  position: absolute;
+  z-index: 100;
+}
+
+.dockable.auto-hide.dock-left:not(.hovered) {
+  transform: translateX(calc(-100% + 8px));
+}
+
+.dockable.auto-hide.dock-right:not(.hovered) {
+  transform: translateX(calc(100% - 8px));
+}
+
+.dockable.auto-hide.dock-top:not(.hovered) {
+  transform: translateY(calc(-100% + 8px));
+}
+
+.dockable.auto-hide.dock-bottom:not(.hovered) {
+  transform: translateY(calc(100% - 8px));
+}
+
+.dockable.auto-hide.dock-floating:not(.hovered) {
+  opacity: 0.4;
+}
+
+.dockable.auto-hide.hovered {
+  transform: none !important;
+  opacity: 1 !important;
+  box-shadow: var(--shadow-lg);
+}
+
+/* Always-visible edge tab when auto-hidden */
+.dockable.auto-hide.dock-left::after,
+.dockable.auto-hide.dock-right::after,
+.dockable.auto-hide.dock-top::after,
+.dockable.auto-hide.dock-bottom::after {
+  content: '⠿';
+  position: absolute;
+  font-size: 14px;
+  color: var(--color-primary);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--r-sm);
+  padding: 4px 6px;
+  pointer-events: none;
+}
+
+.dockable.auto-hide.dock-left::after {
+  right: -16px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.dockable.auto-hide.dock-right::after {
+  left: -16px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.dockable.auto-hide.dock-top::after {
+  bottom: -16px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.dockable.auto-hide.dock-bottom::after {
+  top: -16px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+/* ============================================================
+   COLLAPSED MODE (icon-only, expand on hover)
+   ============================================================ */
+.dockable.collapsed-mode .toolbar__group-label {
+  display: none;
+}
+
+.dockable.collapsed-mode .color-picker,
+.dockable.collapsed-mode .brush-size,
+.dockable.collapsed-mode .recent-colors {
+  display: none;
+}
+
+.dockable.collapsed-mode .color-swatches {
+  display: grid;
+  grid-template-columns: 1fr;
+}
+
+.dockable.collapsed-mode:not(:hover) {
+  width: 44px !important;
+}
+
+.dockable.collapsed-mode:hover {
+  width: var(--toolbar-w) !important;
+}
+
+/* ============================================================
+   FLOATING TOOL BUTTONS (dragged out onto canvas)
+   ============================================================ */
+.floating-tool-btn {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--r-md);
+  background: var(--color-surface);
+  border: 2px solid var(--color-primary);
+  box-shadow: var(--shadow-md);
+  cursor: grab;
+  z-index: 50;
+  transition: transform 100ms, box-shadow 100ms;
+  color: var(--color-primary);
+}
+
+.floating-tool-btn:hover {
+  transform: scale(1.1);
+  box-shadow: var(--shadow-lg);
+}
+
+.floating-tool-btn:active {
+  cursor: grabbing;
+}
+
+.floating-tool-btn svg {
+  width: 20px;
+  height: 20px;
+}
+
+/* Remove indicator (visible on hover) */
+.floating-tool-btn::after {
+  content: '×';
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  width: 14px;
+  height: 14px;
+  background: var(--color-rec);
+  color: #fff;
+  border-radius: 50%;
+  font-size: 10px;
+  line-height: 14px;
+  text-align: center;
+  opacity: 0;
+  transition: opacity 100ms;
+  pointer-events: none;
+}
+
+.floating-tool-btn:hover::after {
+  opacity: 1;
+}
+
+/* ============================================================
+   SNAP INDICATORS (when dragging to dock)
+   ============================================================ */
+.snap-indicator {
+  position: fixed;
+  z-index: 9999;
+  pointer-events: none;
+  background: rgba(26, 115, 232, 0.2);
+  border: 3px dashed var(--color-primary);
+  border-radius: var(--r-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: snapPulse 600ms infinite alternate;
+}
+
+@keyframes snapPulse {
+  from { background: rgba(26, 115, 232, 0.15); }
+  to { background: rgba(26, 115, 232, 0.35); }
+}
+
+.snap-indicator__inner {
+  font-weight: 600;
+  color: var(--color-primary);
+  font-size: var(--fs-sm);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.snap-indicator.snap-left {
+  top: 48px;
+  left: 0;
+  width: 80px;
+  height: calc(100vh - 76px);
+}
+
+.snap-indicator.snap-right {
+  top: 48px;
+  right: 0;
+  width: 80px;
+  height: calc(100vh - 76px);
+}
+
+.snap-indicator.snap-top {
+  top: 48px;
+  left: 0;
+  width: 100vw;
+  height: 80px;
+}
+
+.snap-indicator.snap-bottom {
+  bottom: 0;
+  left: 0;
+  width: 100vw;
+  height: 80px;
+}
+
+/* ============================================================
+   DOCK CONTEXT MENU
+   ============================================================ */
+.dock-context-menu {
+  position: fixed;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--r-md);
+  box-shadow: var(--shadow-lg);
+  padding: 4px;
+  min-width: 180px;
+  z-index: 9999;
+  font-size: var(--fs-sm);
+}
+
+.dock-context-menu .context-menu__item.active {
+  background: var(--color-primary);
+  color: #fff;
+}
+
+.dock-context-menu .context-menu__item.active .context-menu__item-icon {
+  color: #fff;
+}
+
+/* ============================================================
+   RESPONSIVE — hide dock header on very small screens
+   ============================================================ */
+@media (max-width: 700px) {
+  .dock-header__title {
+    display: none;
+  }
+}

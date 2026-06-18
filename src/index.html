@@ -1,0 +1,1344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PENLIVE - Er. Raju Kumawat</title>
+  <link rel="stylesheet" href="styles/main.css" />
+  <link rel="stylesheet" href="styles/toolbar.css" />
+  <link rel="stylesheet" href="styles/panels.css" />
+  <link rel="stylesheet" href="styles/overlay.css" />
+  <link rel="stylesheet" href="styles/advanced.css" />
+  <link rel="stylesheet" href="styles/ux-improvements.css" />
+  <link rel="stylesheet" href="styles/professional.css" />
+  <link rel="stylesheet" href="styles/window-controls.css" />
+  <link rel="stylesheet" href="styles/dynamic-toolbar.css" />
+  <link rel="stylesheet" href="styles/dockable.css" />
+  <link rel="stylesheet" href="styles/command-palette.css" />
+</head>
+<body class="theme-light" data-mode="main">
+
+  <!-- ============ TOP TITLE BAR (Custom Chrome) ============ -->
+  <header class="titlebar" id="titlebar">
+
+    <!-- LEFT: Logo + Menu Bar -->
+    <div class="titlebar__left">
+      <div class="titlebar__logo" id="titlebar-logo">
+        <img src="assets/icon-64.png" alt="PENLIVE" width="28" height="28" />
+      </div>
+      <div class="titlebar__title">
+        <span class="titlebar__name">PENLIVE</span>
+        <span class="titlebar__author">by Er. Raju Kumawat</span>
+      </div>
+
+      <!-- MENU BAR (File / Edit / View / Insert / Tools / Help) -->
+      <nav class="menubar" id="menubar">
+        <div class="menubar__item" data-menu="file">
+          <span>File</span>
+          <div class="menubar__dropdown">
+            <button data-action="new-page"><span>New Page</span><kbd>Ctrl+N</kbd></button>
+            <button data-action="open-file"><span>Open File...</span><kbd>Ctrl+O</kbd></button>
+            <button data-action="save-screenshot"><span>Save Screenshot</span><kbd>Ctrl+Shift+S</kbd></button>
+            <div class="menubar__separator"></div>
+            <button data-action="pdf-export"><span>Export as PDF</span></button>
+            <button data-action="print"><span>Print...</span><kbd>Ctrl+P</kbd></button>
+            <div class="menubar__separator"></div>
+            <button data-action="exit"><span>Exit</span><kbd>Alt+F4</kbd></button>
+          </div>
+        </div>
+
+        <div class="menubar__item" data-menu="edit">
+          <span>Edit</span>
+          <div class="menubar__dropdown">
+            <button data-action="undo"><span>Undo</span><kbd>Ctrl+Z</kbd></button>
+            <button data-action="redo"><span>Redo</span><kbd>Ctrl+Y</kbd></button>
+            <div class="menubar__separator"></div>
+            <button data-action="clear"><span>Clear Page</span></button>
+            <button data-action="insert-image"><span>Insert Image...</span></button>
+          </div>
+        </div>
+
+        <div class="menubar__item" data-menu="view">
+          <span>View</span>
+          <div class="menubar__dropdown">
+            <button data-action="focus-mode"><span>Focus Mode (hide menus)</span><kbd>F</kbd></button>
+            <button data-action="toggle-toolbar"><span>Toggle Toolbar</span><kbd>Ctrl+B</kbd></button>
+            <button data-action="toggle-panel"><span>Toggle Right Panel</span><kbd>Ctrl+J</kbd></button>
+            <button data-action="fullscreen"><span>Fullscreen</span><kbd>F11</kbd></button>
+            <div class="menubar__separator"></div>
+            <button data-action="theme"><span>Toggle Theme</span><kbd>Ctrl+Shift+T</kbd></button>
+            <button data-action="zoom-in"><span>Zoom In</span><kbd>Ctrl++</kbd></button>
+            <button data-action="zoom-out"><span>Zoom Out</span><kbd>Ctrl+-</kbd></button>
+          </div>
+        </div>
+
+        <div class="menubar__item" data-menu="insert">
+          <span>Insert</span>
+          <div class="menubar__dropdown">
+            <button data-action="insert-image"><span>Image...</span></button>
+            <button data-action="insert-sticky"><span>Sticky Note</span></button>
+            <button data-action="insert-text"><span>Text Box</span><kbd>T</kbd></button>
+            <button data-action="insert-step"><span>Numbered Step</span></button>
+            <div class="menubar__separator"></div>
+            <button data-action="open-browser"><span>Browser Panel</span></button>
+            <button data-action="open-file"><span>File Viewer...</span></button>
+          </div>
+        </div>
+
+        <div class="menubar__item" data-menu="tools">
+          <span>Tools</span>
+          <div class="menubar__dropdown">
+            <button data-action="snipping"><span>Snipping Tool</span><kbd>Ctrl+Shift+X</kbd></button>
+            <button data-action="cursor-fx"><span>Cursor Effects</span></button>
+            <button data-action="laser"><span>Laser Pointer</span><kbd>L</kbd></button>
+            <button data-action="magnifier"><span>Magnifier</span></button>
+            <button data-action="spotlight"><span>Spotlight</span></button>
+            <div class="menubar__separator"></div>
+            <button data-action="overlay"><span>Overlay Mode</span><kbd>Ctrl+Shift+O</kbd></button>
+            <button data-action="board-color"><span>Board Color...</span></button>
+            <button data-action="template"><span>Background Template</span></button>
+          </div>
+        </div>
+
+        <div class="menubar__item" data-menu="record">
+          <span>Record</span>
+          <div class="menubar__dropdown">
+            <button data-action="record"><span>Start/Stop Recording</span><kbd>Ctrl+Shift+R</kbd></button>
+            <button data-action="pause"><span>Pause/Resume</span></button>
+            <button data-action="screenshot"><span>Screenshot</span><kbd>Ctrl+Shift+S</kbd></button>
+            <div class="menubar__separator"></div>
+            <button data-action="liveclass"><span>Live Class...</span></button>
+            <button data-action="stream"><span>RTMP Stream...</span></button>
+            <button data-action="vcam"><span>Virtual Camera</span></button>
+          </div>
+        </div>
+
+        <div class="menubar__item" data-menu="help">
+          <span>Help</span>
+          <div class="menubar__dropdown">
+            <button data-action="shortcuts"><span>Keyboard Shortcuts</span><kbd>?</kbd></button>
+            <button data-action="about"><span>About PENLIVE</span></button>
+            <button data-action="stats"><span>Statistics</span></button>
+            <div class="menubar__separator"></div>
+            <button data-action="check-update"><span>Check for Updates</span></button>
+            <button data-action="docs"><span>Documentation ↗</span></button>
+          </div>
+        </div>
+      </nav>
+    </div>
+
+    <!-- CENTER: Quick Actions (hidden in focus mode) -->
+    <div class="titlebar__center">
+      <button class="tb-btn" id="btn-new-page" title="New Page (Ctrl+N)">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+        <span>New</span>
+      </button>
+      <button class="tb-btn" id="btn-undo" title="Undo (Ctrl+Z)">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 7v6h6"/><path d="M21 17a9 9 0 0 0-9-9 9 9 0 0 0-6 2.3L3 13"/></svg>
+      </button>
+      <button class="tb-btn" id="btn-redo" title="Redo (Ctrl+Y)">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 7v6h-6"/><path d="M3 17a9 9 0 0 1 9-9 9 9 0 0 1 6 2.3L21 13"/></svg>
+      </button>
+      <button class="tb-btn" id="btn-clear" title="Clear Page">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-2 14a2 2 0 0 1-2 2H9a2 2 0 0 1-2-2L5 6"/></svg>
+        <span>Clear</span>
+      </button>
+
+      <div class="tb-divider"></div>
+
+      <button class="tb-btn" id="btn-snipping" title="Snipping Tool (Ctrl+Shift+X)">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L6 8 2 8 2 22 14 22 14 18 22 18 22 2 6 2z"/><circle cx="9" cy="12" r="2"/></svg>
+        <span>Snip</span>
+      </button>
+      <button class="tb-btn" id="btn-pdf-export" title="Export all pages as PDF">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="9" y1="15" x2="15" y2="15"/></svg>
+        <span>PDF</span>
+      </button>
+      <button class="tb-btn" id="btn-print" title="Print (Ctrl+P)">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+      </button>
+      <button class="tb-btn" id="btn-image-import" title="Insert Image">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+      </button>
+
+      <div class="tb-divider"></div>
+
+      <button class="tb-btn" id="btn-cursor-fx" title="Cursor Effects">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 13l6 6"/><path d="M3 3l8 18 2-8 8-2L3 3z"/></svg>
+        <span>Cursor</span>
+      </button>
+      <button class="tb-btn" id="btn-laser" title="Laser Pointer (L)">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3" fill="currentColor"/><circle cx="12" cy="12" r="8" stroke-dasharray="3 3"/></svg>
+        <span>Laser</span>
+      </button>
+      <button class="tb-btn" id="btn-magnifier" title="Magnifier">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      </button>
+      <button class="tb-btn" id="btn-spotlight" title="Spotlight Mode">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5" fill="currentColor" opacity="0.3"/><circle cx="12" cy="12" r="9"/></svg>
+      </button>
+
+      <div class="tb-divider"></div>
+
+      <button class="tb-btn" id="btn-template" title="Background Template">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="3" y1="15" x2="21" y2="15"/><line x1="9" y1="3" x2="9" y2="21"/><line x1="15" y1="3" x2="15" y2="21"/></svg>
+        <span>Template</span>
+      </button>
+      <button class="tb-btn" id="btn-board-mode" title="Toggle Whiteboard/Blackboard">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/></svg>
+      </button>
+    </div>
+
+    <!-- RIGHT: App buttons + Window Controls -->
+    <div class="titlebar__right">
+      <button class="tb-btn" id="btn-focus-mode" title="Focus Mode (hide menus) — F">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9V5a2 2 0 0 1 2-2h4"/><path d="M21 9V5a2 2 0 0 0-2-2h-4"/><path d="M3 15v4a2 2 0 0 0 2 2h4"/><path d="M21 15v4a2 2 0 0 1-2 2h-4"/></svg>
+      </button>
+      <button class="tb-btn" id="btn-theme" title="Toggle Dark/Light Theme">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      </button>
+      <button class="tb-btn" id="btn-language" title="Language / भाषा">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+        <span id="lang-label">EN</span>
+      </button>
+      <button class="tb-btn" id="btn-stats" title="Statistics Dashboard">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+      </button>
+      <button class="tb-btn tb-btn--accent" id="btn-record" title="Start Recording (Ctrl+Shift+R)">
+        <span class="rec-dot"></span>
+        <span id="rec-label">Record</span>
+      </button>
+      <button class="tb-btn" id="btn-screenshot" title="Screenshot (Ctrl+Shift+S)">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
+      </button>
+      <button class="tb-btn" id="btn-overlay" title="Overlay Mode (Ctrl+Shift+O)">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+        <span>Overlay</span>
+      </button>
+      <button class="tb-btn" id="btn-settings" title="Settings / About">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+      </button>
+
+      <!-- WINDOW CONTROLS (like Windows apps) -->
+      <div class="window-controls">
+        <button class="wc-btn" id="wc-minimize" title="Minimize">
+          <svg viewBox="0 0 12 12" width="12" height="12"><line x1="2" y1="6" x2="10" y2="6" stroke="currentColor" stroke-width="1.5"/></svg>
+        </button>
+        <button class="wc-btn" id="wc-maximize" title="Maximize / Restore">
+          <svg viewBox="0 0 12 12" width="12" height="12" id="wc-maximize-icon"><rect x="2.5" y="2.5" width="7" height="7" stroke="currentColor" stroke-width="1.5" fill="none"/></svg>
+        </button>
+        <button class="wc-btn wc-btn--close" id="wc-close" title="Close (Alt+F4)">
+          <svg viewBox="0 0 12 12" width="12" height="12"><path d="M2 2 L10 10 M10 2 L2 10" stroke="currentColor" stroke-width="1.5"/></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ============ LEFT TOOLBAR (Drawing) - Grouped with Labels ============ -->
+  <aside class="toolbar toolbar--left">
+
+    <!-- GROUP: DRAW -->
+    <div class="toolbar__section">
+      <div class="toolbar__group-label">Draw</div>
+      <div class="tool-group" data-group="pens">
+        <button class="tool-btn active" data-tool="pen" title="Pen (P)">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 19l7-7 3 3-7 7-3-3z"/><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/><circle cx="11" cy="11" r="2"/></svg>
+        </button>
+        <button class="tool-btn" data-tool="highlighter" title="Highlighter (H)">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11l-6 6v3h3l6-6"/><path d="M22 12l-4.6 4.6a2 2 0 0 1-2.8 0l-5.2-5.2a2 2 0 0 1 0-2.8L14 4"/></svg>
+        </button>
+        <button class="tool-btn" data-tool="eraser" title="Eraser (E)">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 20H7l-4-4 9.5-9.5a2 2 0 0 1 2.8 0l5.7 5.7a2 2 0 0 1 0 2.8L13 20"/><line x1="18" y1="13" x2="9" y2="4"/></svg>
+        </button>
+        <button class="tool-btn" data-tool="fading" title="Fading Ink (auto-disappears)">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 17l6-6 4 4 8-8" stroke-dasharray="2 2"/><circle cx="3" cy="17" r="1" fill="currentColor"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <div class="tool-divider"></div>
+
+    <!-- GROUP: SHAPES -->
+    <div class="toolbar__section">
+      <div class="toolbar__group-label">Shapes</div>
+      <div class="tool-group" data-group="shapes">
+        <button class="tool-btn" data-tool="line" title="Line (L)">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="19" x2="19" y2="5"/></svg>
+        </button>
+        <button class="tool-btn" data-tool="rectangle" title="Rectangle (R)">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="1"/></svg>
+        </button>
+        <button class="tool-btn" data-tool="circle" title="Circle (C)">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/></svg>
+        </button>
+        <button class="tool-btn" data-tool="arrow" title="Arrow (A)">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </button>
+        <button class="tool-btn" data-tool="triangle" title="Triangle">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 3 22 20 2 20"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <div class="tool-divider"></div>
+
+    <!-- GROUP: TEXT -->
+    <div class="toolbar__section">
+      <div class="toolbar__group-label">Text</div>
+      <div class="tool-group" data-group="text">
+        <button class="tool-btn" data-tool="text" title="Text (T)">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><polyline points="4 7 4 4 20 4 20 7"/><line x1="9" y1="20" x2="15" y2="20"/><line x1="12" y1="4" x2="12" y2="20"/></svg>
+        </button>
+        <button class="tool-btn" data-tool="sticky" title="Sticky Note">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+        </button>
+        <button class="tool-btn" data-tool="callout" title="Callout / Speech Bubble">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        </button>
+        <button class="tool-btn" data-tool="step" title="Numbered Step">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><text x="12" y="16" text-anchor="middle" font-size="10" font-weight="bold" fill="currentColor" stroke="none">1</text></svg>
+        </button>
+      </div>
+    </div>
+
+    <div class="tool-divider"></div>
+
+    <!-- GROUP: ADVANCED -->
+    <div class="toolbar__section">
+      <div class="toolbar__group-label">Edit</div>
+      <div class="tool-group" data-group="advanced">
+        <button class="tool-btn" data-tool="blur" title="Blur / Pixelate">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3" opacity="0.3"/><circle cx="6" cy="6" r="2" opacity="0.5"/><circle cx="18" cy="18" r="2" opacity="0.5"/><circle cx="6" cy="18" r="2" opacity="0.7"/><circle cx="18" cy="6" r="2" opacity="0.7"/></svg>
+        </button>
+        <button class="tool-btn" data-tool="fill" title="Fill Bucket">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 11h2m-1 -1v2"/><path d="M5.5 13.5l6.5 6.5 6.5 -6.5a4.5 4.5 0 0 0 -6.5 -6.5l-6.5 6.5z"/></svg>
+        </button>
+        <button class="tool-btn" data-tool="lasso" title="Lasso Selection">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 7c0 5 5 9 10 9s8-3 8-7-3-7-8-7-10 0-10 5z"/><circle cx="6" cy="18" r="2"/></svg>
+        </button>
+        <button class="tool-btn" data-tool="stamp" title="Annotation Stamps">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <div class="tool-divider"></div>
+
+    <!-- GROUP: COLORS -->
+    <div class="toolbar__section">
+      <div class="toolbar__group-label">Colors</div>
+      <div class="color-picker">
+        <input type="color" id="color-input" value="#1a73e8" aria-label="Choose custom color" title="Pick custom color" />
+        <div class="color-swatches">
+          <button class="swatch" style="background:#1a1a1a" data-color="#1a1a1a" title="Black"></button>
+          <button class="swatch" style="background:#ffffff;border:1px solid #ccc" data-color="#ffffff" title="White"></button>
+          <button class="swatch" style="background:#e8392f" data-color="#e8392f" title="Red"></button>
+          <button class="swatch" style="background:#f5a623" data-color="#f5a623" title="Orange"></button>
+          <button class="swatch" style="background:#ffd60a" data-color="#ffd60a" title="Yellow"></button>
+          <button class="swatch" style="background:#1a73e8" data-color="#1a73e8" title="Blue"></button>
+          <button class="swatch" style="background:#0f9d58" data-color="#0f9d58" title="Green"></button>
+          <button class="swatch" style="background:#00bcd4" data-color="#00bcd4" title="Cyan"></button>
+          <button class="swatch" style="background:#9c27b0" data-color="#9c27b0" title="Purple"></button>
+          <button class="swatch" style="background:#795548" data-color="#795548" title="Brown"></button>
+          <button class="swatch" style="background:#607d8b" data-color="#607d8b" title="Blue Gray"></button>
+          <button class="swatch" style="background:#ff4081" data-color="#ff4081" title="Pink"></button>
+        </div>
+        <div class="recent-colors" id="recent-colors" title="Recent colors"></div>
+      </div>
+    </div>
+
+    <div class="tool-divider"></div>
+
+    <!-- GROUP: SIZE -->
+    <div class="toolbar__section">
+      <div class="toolbar__group-label">Size</div>
+      <div class="brush-size">
+        <label for="brush-size">Width</label>
+        <input type="range" id="brush-size" min="1" max="80" value="4" aria-label="Brush size" />
+        <span id="brush-size-value">4</span>
+      </div>
+      <div class="brush-size">
+        <label for="brush-opacity">Opacity</label>
+        <input type="range" id="brush-opacity" min="10" max="100" value="100" aria-label="Brush opacity" />
+        <span id="brush-opacity-value">100</span>
+      </div>
+    </div>
+
+  </aside>
+
+  <!-- ============ MAIN CANVAS AREA ============ -->
+  <main class="canvas-area" id="canvas-area">
+
+    <!-- FOCUS MODE INDICATOR (shown when in focus mode) -->
+    <div class="focus-mode-indicator" id="focus-mode-indicator">
+      <span>Focus Mode</span>
+      <button id="exit-focus-mode">Exit (F)</button>
+    </div>
+
+    <!-- EMPTY-STATE HINT (shown when canvas is blank) -->
+    <div class="canvas-empty-hint" id="canvas-empty-hint">
+      <div class="canvas-empty-hint__icon">✏️</div>
+      <div class="canvas-empty-hint__title">Start drawing here</div>
+      <div class="canvas-empty-hint__text">
+        Pick a tool from the left toolbar and click anywhere to begin.<br>
+        Press <kbd>?</kbd> to see all keyboard shortcuts.
+      </div>
+      <div class="canvas-empty-hint__shortcuts">
+        <kbd>P</kbd> Pen
+        <kbd>H</kbd> Highlighter
+        <kbd>E</kbd> Eraser
+        <kbd>T</kbd> Text
+        <kbd>Ctrl+Shift+R</kbd> Record
+      </div>
+    </div>
+
+    <!-- WHITEBOARD CANVAS -->
+    <canvas id="board-canvas"></canvas>
+
+    <!-- OVERLAY CANVAS (for transient shape preview) -->
+    <canvas id="preview-canvas"></canvas>
+
+    <!-- LASER POINTER TRAIL CANVAS -->
+    <canvas id="laser-canvas"></canvas>
+
+    <!-- SNIPPING TOOL OVERLAY -->
+    <div class="snipping-overlay" id="snipping-overlay" hidden>
+      <div class="snipping-mask" id="snipping-mask"></div>
+      <div class="snipping-selection" id="snipping-selection"></div>
+      <div class="snipping-toolbar">
+        <button data-action="capture" title="Capture">📷</button>
+        <button data-action="cancel" title="Cancel">✕</button>
+      </div>
+    </div>
+
+    <!-- SPOTLIGHT OVERLAY (mask reveal) -->
+    <div class="spotlight-overlay" id="spotlight-overlay" hidden>
+      <div class="spotlight-hole" id="spotlight-hole"></div>
+    </div>
+
+    <!-- MAGNIFIER LENS -->
+    <div class="magnifier-lens" id="magnifier-lens" hidden>
+      <canvas id="magnifier-canvas" width="200" height="200"></canvas>
+    </div>
+
+    <!-- CURSOR EFFECTS LAYER -->
+    <div class="cursor-fx-layer" id="cursor-fx-layer">
+      <div class="cursor-click-ripple" id="cursor-ripple-template" hidden></div>
+    </div>
+
+    <!-- CURSOR EFFECTS PANEL -->
+    <div class="floating-panel cursor-fx-panel" id="cursor-fx-panel" hidden>
+      <h4>Cursor Effects</h4>
+      <label><input type="checkbox" id="fx-highlight" /> Highlight cursor</label>
+      <label><input type="checkbox" id="fx-spotlight" /> Spotlight on cursor</label>
+      <label><input type="checkbox" id="fx-click-ripple" /> Click ripple animation</label>
+      <label><input type="checkbox" id="fx-click-sound" /> Click sound</label>
+      <label>Cursor size: <input type="range" id="fx-size" min="10" max="80" value="30" /></label>
+      <label>Highlight color: <input type="color" id="fx-color" value="#ffd60a" /></label>
+    </div>
+
+    <!-- TEMPLATE PICKER PANEL -->
+    <div class="floating-panel template-panel" id="template-panel" hidden>
+      <h4>Background Template</h4>
+      <div class="template-grid">
+        <button class="template-btn active" data-template="blank">Blank</button>
+        <button class="template-btn" data-template="grid">Grid</button>
+        <button class="template-btn" data-template="lined">Lined</button>
+        <button class="template-btn" data-template="dotted">Dotted</button>
+        <button class="template-btn" data-template="music">Music Sheet</button>
+        <button class="template-btn" data-template="isometric">Isometric</button>
+        <button class="template-btn" data-template="dark">Dark</button>
+        <button class="template-btn" data-template="blackboard">Blackboard</button>
+      </div>
+    </div>
+
+    <!-- STAMP PICKER PANEL -->
+    <div class="floating-panel stamp-panel" id="stamp-panel" hidden>
+      <h4>Annotation Stamps</h4>
+      <div class="stamp-grid">
+        <button class="stamp-btn" data-stamp="check">✓</button>
+        <button class="stamp-btn" data-stamp="cross">✗</button>
+        <button class="stamp-btn" data-stamp="star">★</button>
+        <button class="stamp-btn" data-stamp="heart">♥</button>
+        <button class="stamp-btn" data-stamp="arrow">→</button>
+        <button class="stamp-btn" data-stamp="question">?</button>
+        <button class="stamp-btn" data-stamp="exclaim">!</button>
+        <button class="stamp-btn" data-stamp="tick">☐</button>
+      </div>
+    </div>
+
+    <!-- WEBCAM PIP (draggable, snap-to-corners) -->
+    <div class="webcam-pip" id="webcam-pip" draggable="true">
+      <video id="webcam-video" autoplay muted playsinline></video>
+      <div class="webcam-pip__header">
+        <span class="webcam-pip__title">Webcam</span>
+        <button class="webcam-pip__close" id="webcam-close">×</button>
+      </div>
+      <div class="webcam-pip__snap-indicator"></div>
+      <div class="webcam-pip__controls">
+        <button id="webcam-pip-tl" title="Top-left">↖</button>
+        <button id="webcam-pip-tr" title="Top-right">↗</button>
+        <button id="webcam-pip-bl" title="Bottom-left">↙</button>
+        <button id="webcam-pip-br" title="Bottom-right">↘</button>
+      </div>
+      <div class="webcam-pip__resize"></div>
+    </div>
+
+    <!-- DRAG-DROP VIDEO TARGET -->
+    <div class="dropzone" id="video-dropzone">
+      <div class="dropzone__inner">
+        <svg viewBox="0 0 24 24" width="48" height="48" fill="none" stroke="currentColor" stroke-width="2"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg>
+        <p>Drop video file here or <button class="dropzone__browse">Browse</button></p>
+        <p class="dropzone__hint">MP4, WebM, MOV — max 2GB</p>
+        <input type="file" id="video-file-input" accept="video/*" hidden aria-label="Video file input" />
+      </div>
+    </div>
+
+    <!-- VIDEO PLAYER (for dropped files) -->
+    <div class="video-player" id="video-player" hidden>
+      <video id="dropped-video" controls></video>
+      <button class="video-player__close" id="video-close">×</button>
+    </div>
+
+    <!-- STICKY NOTES CONTAINER -->
+    <div class="sticky-container" id="sticky-container"></div>
+
+    <!-- TEXT INPUT OVERLAY -->
+    <input type="text" id="text-input" class="text-input" hidden placeholder="Type and press Enter..." />
+
+    <!-- ============ BUILT-IN BROWSER PANEL ============ -->
+    <div class="browser-panel" id="browser-panel" hidden>
+      <div class="browser-panel__header">
+        <div class="browser-panel__nav">
+          <button id="browser-back" title="Back">←</button>
+          <button id="browser-forward" title="Forward">→</button>
+          <button id="browser-refresh" title="Refresh">⟳</button>
+          <button id="browser-home" title="Home">⌂</button>
+        </div>
+        <input type="text" id="browser-url" placeholder="Search or type URL" value="https://en.wikipedia.org" />
+        <button id="browser-go" title="Go">Go</button>
+        <button id="browser-open-external" title="Open in browser">↗</button>
+        <button id="browser-close" title="Close browser">×</button>
+      </div>
+      <div class="browser-panel__body">
+        <iframe id="browser-iframe" src="https://en.wikipedia.org/wiki/Main_Page" referrerpolicy="no-referrer" sandbox="allow-scripts allow-same-origin allow-forms allow-popups"></iframe>
+        <div class="browser-blocked-notice" id="browser-blocked-notice" hidden>
+          <div class="browser-blocked-notice__inner">
+            <h3>🌐 Browser Blocked</h3>
+            <p>Some sites (Google, YouTube, etc.) block embedding for security.</p>
+            <p>Try alternative URLs like:</p>
+            <ul>
+              <li><a href="#" data-url="https://en.wikipedia.org">en.wikipedia.org</a></li>
+              <li><a href="#" data-url="https://www.bing.com">www.bing.com</a></li>
+              <li><a href="#" data-url="https://duckduckgo.com">duckduckgo.com</a></li>
+              <li><a href="#" data-url="https://www.khanacademy.org">khanacademy.org</a></li>
+            </ul>
+            <button id="browser-open-external-2">Open in system browser ↗</button>
+          </div>
+        </div>
+      </div>
+      <div class="browser-panel__resize"></div>
+    </div>
+
+    <!-- ============ LIVE CLASS PANEL ============ -->
+    <div class="liveclass-panel" id="liveclass-panel" hidden>
+      <div class="liveclass-panel__header">
+        <h3>🎓 Live Class</h3>
+        <button id="liveclass-close">×</button>
+      </div>
+      <div class="liveclass-panel__body">
+        <div class="liveclass-status" id="liveclass-status">
+          <div class="liveclass-status__icon">🔴</div>
+          <div class="liveclass-status__text">
+            <div class="liveclass-status__title">Not Connected</div>
+            <div class="liveclass-status__sub">Start or join a class session</div>
+          </div>
+        </div>
+
+        <div class="liveclass-actions">
+          <button class="liveclass-btn liveclass-btn--primary" id="liveclass-create">
+            <span class="liveclass-btn__icon">+</span>
+            <span>Create New Class</span>
+          </button>
+          <button class="liveclass-btn" id="liveclass-join">
+            <span class="liveclass-btn__icon">→</span>
+            <span>Join with Code</span>
+          </button>
+        </div>
+
+        <div class="liveclass-code-section">
+          <label>Class Code:</label>
+          <input type="text" id="liveclass-code-input" placeholder="ABC123" maxlength="6" />
+          <button id="liveclass-copy" title="Copy invite link">📋 Copy Link</button>
+        </div>
+
+        <div class="liveclass-participants">
+          <h4>Participants (<span id="liveclass-count">0</span>)</h4>
+          <ul id="liveclass-list">
+            <li class="liveclass-empty">No participants yet</li>
+          </ul>
+        </div>
+
+        <div class="liveclass-chat">
+          <h4>Chat</h4>
+          <div class="liveclass-chat__messages" id="liveclass-messages">
+            <div class="liveclass-chat__placeholder">Messages will appear here</div>
+          </div>
+          <div class="liveclass-chat__input">
+            <input type="text" id="liveclass-chat-input" placeholder="Type a message..." />
+            <button id="liveclass-chat-send">Send</button>
+          </div>
+        </div>
+
+        <div class="liveclass-platforms">
+          <h4>Or join via:</h4>
+          <div class="liveclass-platform-grid">
+            <button class="platform-btn" data-platform="zoom">🎥 Zoom</button>
+            <button class="platform-btn" data-platform="meet">📹 Google Meet</button>
+            <button class="platform-btn" data-platform="teams">💼 MS Teams</button>
+            <button class="platform-btn" data-platform="youtube">▶️ YouTube Live</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============ UNIVERSAL FILE VIEWER ============ -->
+    <div class="file-viewer" id="file-viewer" hidden>
+      <div class="file-viewer__header">
+        <div class="file-viewer__title">
+          <span id="file-viewer-icon">📄</span>
+          <span id="file-viewer-name">File</span>
+          <span id="file-viewer-size" class="file-viewer__size"></span>
+        </div>
+        <div class="file-viewer__actions">
+          <button id="file-viewer-zoom-out" title="Zoom out">−</button>
+          <span id="file-viewer-zoom-level">100%</span>
+          <button id="file-viewer-zoom-in" title="Zoom in">+</button>
+          <button id="file-viewer-download" title="Download">⬇</button>
+          <button id="file-viewer-close" title="Close">×</button>
+        </div>
+      </div>
+      <div class="file-viewer__body" id="file-viewer-body">
+        <!-- Content rendered based on file type -->
+      </div>
+      <div class="file-viewer__resize"></div>
+    </div>
+
+    <!-- ============ BOARD COLOR PICKER ============ -->
+    <div class="floating-panel board-color-panel" id="board-color-panel" hidden>
+      <h4>Board Color</h4>
+      <div class="board-color-presets">
+        <button class="board-color-btn active" data-board-color="#ffffff" style="background:#ffffff;border:1px solid #ccc" title="White"></button>
+        <button class="board-color-btn" data-board-color="#fff9c4" style="background:#fff9c4" title="Cream"></button>
+        <button class="board-color-btn" data-board-color="#c8e6c9" style="background:#c8e6c9" title="Mint"></button>
+        <button class="board-color-btn" data-board-color="#bbdefb" style="background:#bbdefb" title="Sky"></button>
+        <button class="board-color-btn" data-board-color="#1a1a1a" style="background:#1a1a1a" title="Black"></button>
+        <button class="board-color-btn" data-board-color="#1a2818" style="background:#1a2818" title="Dark Green (Blackboard)"></button>
+        <button class="board-color-btn" data-board-color="#2c1810" style="background:#2c1810" title="Sepia"></button>
+        <button class="board-color-btn" data-board-color="#fce4ec" style="background:#fce4ec" title="Pink"></button>
+      </div>
+      <label class="board-color-custom">
+        <span>Custom:</span>
+        <input type="color" id="board-color-custom" value="#ffffff" />
+      </label>
+      <div class="board-color-actions">
+        <button id="board-color-apply" class="record-btn" style="background: var(--color-primary); padding: 6px;">Apply</button>
+      </div>
+    </div>
+
+    <!-- ============ BOTTOM TOOLBAR (Quick Access) ============ -->
+    <div class="bottom-toolbar" id="bottom-toolbar">
+      <button class="btb-btn" id="btb-browser" title="Open Browser">
+        <span class="btb-btn__icon">🌐</span>
+        <span class="btb-btn__label">Browser</span>
+      </button>
+      <button class="btb-btn" id="btb-liveclass" title="Live Class">
+        <span class="btb-btn__icon">🎓</span>
+        <span class="btb-btn__label">Live Class</span>
+      </button>
+      <button class="btb-btn" id="btb-open-file" title="Open File (any type)">
+        <span class="btb-btn__icon">📂</span>
+        <span class="btb-btn__label">Open File</span>
+      </button>
+      <button class="btb-btn" id="btb-board-color" title="Change Board Color">
+        <span class="btb-btn__icon">🎨</span>
+        <span class="btb-btn__label">Board Color</span>
+      </button>
+      <button class="btb-btn" id="btb-webcam-pip" title="Toggle Webcam PiP">
+        <span class="btb-btn__icon">📹</span>
+        <span class="btb-btn__label">Webcam</span>
+      </button>
+      <div class="btb-divider"></div>
+      <button class="btb-btn" id="btb-snapshot" title="Take Snapshot">
+        <span class="btb-btn__icon">📸</span>
+        <span class="btb-btn__label">Snapshot</span>
+      </button>
+      <button class="btb-btn" id="btb-fullscreen" title="Toggle Fullscreen">
+        <span class="btb-btn__icon">⛶</span>
+        <span class="btb-btn__label">Fullscreen</span>
+      </button>
+      <div class="btb-divider"></div>
+      <div class="btb-info">
+        <span id="btb-connection-status">●</span>
+        <span id="btb-status-text">Ready</span>
+      </div>
+    </div>
+
+    <!-- STATUS BAR -->
+    <div class="statusbar">
+      <div class="statusbar__left">
+        <span id="page-indicator">Page 1</span>
+        <button class="status-btn" id="page-prev">‹</button>
+        <button class="status-btn" id="page-next">›</button>
+        <button class="status-btn" id="page-add">+</button>
+      </div>
+      <div class="statusbar__center">
+        <span id="cursor-pos">x: 0, y: 0</span>
+      </div>
+      <div class="statusbar__right">
+        <span id="perf-info">Ready</span>
+        <span id="autosave-status">Auto-saved</span>
+      </div>
+    </div>
+  </main>
+
+  <!-- ============ RIGHT PANEL (Recording / Settings) ============ -->
+  <aside class="panel panel--right" id="right-panel">
+
+    <!-- RECORDING TAB -->
+    <div class="panel__tab" data-tab="recording">
+      <h3 class="panel__title">Recording Studio</h3>
+
+      <div class="panel__section">
+        <label class="panel__label">Source</label>
+        <div class="source-grid">
+          <label class="source-check">
+            <input type="checkbox" id="src-screen" checked />
+            <span>Screen</span>
+          </label>
+          <label class="source-check">
+            <input type="checkbox" id="src-webcam" />
+            <span>Webcam</span>
+          </label>
+          <label class="source-check">
+            <input type="checkbox" id="src-mic" checked />
+            <span>Microphone</span>
+          </label>
+          <label class="source-check">
+            <input type="checkbox" id="src-system-audio" />
+            <span>System Audio</span>
+          </label>
+        </div>
+      </div>
+
+      <div class="panel__section">
+        <label class="panel__label" for="monitor-select">Monitor (Multi-Screen)</label>
+        <select id="monitor-select" class="panel__select" aria-label="Select monitor for recording"></select>
+      </div>
+
+      <div class="panel__section">
+        <label class="panel__label" for="webcam-select">Webcam Device</label>
+        <select id="webcam-select" class="panel__select" aria-label="Select webcam device"></select>
+      </div>
+
+      <div class="panel__section">
+        <label class="panel__label" for="mic-select">Microphone Device (External Mic Support)</label>
+        <select id="mic-select" class="panel__select" aria-label="Select microphone device"></select>
+      </div>
+
+      <div class="panel__section">
+        <label class="panel__label">Video Quality</label>
+        <div class="quality-grid">
+          <button class="quality-btn" data-quality="720p">720p<br><small>30fps · 2.5Mbps</small></button>
+          <button class="quality-btn active" data-quality="1080p">1080p<br><small>30fps · 5Mbps</small></button>
+          <button class="quality-btn" data-quality="1440p">1440p<br><small>30fps · 8Mbps</small></button>
+          <button class="quality-btn" data-quality="4k">4K<br><small>60fps · 15Mbps</small></button>
+        </div>
+      </div>
+
+      <div class="panel__section">
+        <label class="panel__label" for="format-select">Output Format</label>
+        <select id="format-select" class="panel__select" aria-label="Select output format">
+          <option value="webm">WebM (recommended)</option>
+          <option value="mp4">MP4 (H.264)</option>
+          <option value="gif">GIF (short clips)</option>
+        </select>
+      </div>
+
+      <div class="panel__section">
+        <div class="record-controls">
+          <button class="record-btn" id="record-start">
+            <span class="rec-dot"></span> Start Recording
+          </button>
+          <button class="record-btn record-btn--pause" id="record-pause" disabled>
+            ⏸ Pause
+          </button>
+          <button class="record-btn record-btn--stop" id="record-stop" disabled>
+            <span class="rec-dot rec-dot--active"></span> Stop &amp; Save
+          </button>
+        </div>
+        <div class="record-timer" id="record-timer">00:00:00</div>
+        <div class="countdown-display" id="countdown-display" hidden>3</div>
+      </div>
+
+      <div class="panel__section">
+        <label class="panel__label">Advanced Recording Options</label>
+        <label class="switch">
+          <input type="checkbox" id="opt-countdown" checked />
+          <span>3-second countdown before start</span>
+        </label>
+        <label class="switch">
+          <input type="checkbox" id="opt-watermark" />
+          <span>Add watermark (logo / text)</span>
+        </label>
+        <label class="switch">
+          <input type="checkbox" id="opt-replay-buffer" />
+          <span>Replay buffer (save last 30s)</span>
+        </label>
+        <label class="switch">
+          <input type="checkbox" id="opt-mouse-fx" checked />
+          <span>Mouse click effects in recording</span>
+        </label>
+        <label class="switch">
+          <input type="checkbox" id="opt-capture-cursor" checked />
+          <span>Capture cursor</span>
+        </label>
+      </div>
+
+      <div class="panel__section">
+        <label class="panel__label">Scheduled Recording</label>
+        <div class="schedule-row">
+          <input type="datetime-local" id="schedule-time" class="panel__select" aria-label="Scheduled recording start time" />
+          <button class="schedule-btn" id="schedule-add" title="Add scheduled recording">+</button>
+        </div>
+        <select id="schedule-duration" class="panel__select" aria-label="Scheduled recording duration">
+          <option value="300">5 minutes</option>
+          <option value="600">10 minutes</option>
+          <option value="1800">30 minutes</option>
+          <option value="3600">1 hour</option>
+          <option value="7200">2 hours</option>
+        </select>
+        <ul class="schedule-list" id="schedule-list">
+          <li class="recording-list__empty">No scheduled recordings</li>
+        </ul>
+      </div>
+
+      <div class="panel__section">
+        <label class="panel__label">Auto-complete Recording</label>
+        <select id="auto-stop-mode" class="panel__select" aria-label="Auto-stop mode">
+          <option value="off">Off (manual stop)</option>
+          <option value="time">Stop after N minutes</option>
+          <option value="size">Stop at file size (MB)</option>
+        </select>
+        <input type="number" id="auto-stop-value" placeholder="Value" class="panel__select" min="1" aria-label="Auto-stop value" />
+      </div>
+
+      <div class="panel__section">
+        <label class="panel__label">Recent Recordings</label>
+        <ul class="recording-list" id="recording-list">
+          <li class="recording-list__empty">No recordings yet</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- AUDIO MIXER TAB -->
+    <div class="panel__tab" data-tab="audio" hidden>
+      <h3 class="panel__title">Audio Mixer</h3>
+
+      <div class="panel__section">
+        <label class="panel__label">Microphone</label>
+        <div class="audio-channel">
+          <div class="audio-channel__header">
+            <span>🎤 Mic</span>
+            <label class="switch-inline"><input type="checkbox" id="mic-mute" /> Mute</label>
+          </div>
+          <div class="audio-channel__volume">
+            <input type="range" id="mic-volume" min="0" max="100" value="100" aria-label="Microphone volume" />
+            <span id="mic-volume-value">100</span>
+          </div>
+          <div class="peak-meter" id="mic-peak">
+            <div class="peak-meter__bar" id="mic-peak-bar"></div>
+          </div>
+          <div class="audio-channel__fx">
+            <label class="switch-inline"><input type="checkbox" id="mic-noise-suppress" checked /> Noise Suppression</label>
+            <label class="switch-inline"><input type="checkbox" id="mic-echo-cancel" checked /> Echo Cancel</label>
+            <label class="switch-inline"><input type="checkbox" id="mic-agc" checked /> Auto Gain</label>
+            <label class="switch-inline"><input type="checkbox" id="mic-ducking" /> Ducking</label>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel__section">
+        <label class="panel__label">System Audio</label>
+        <div class="audio-channel">
+          <div class="audio-channel__header">
+            <span>🔊 System</span>
+            <label class="switch-inline"><input type="checkbox" id="sys-mute" /> Mute</label>
+          </div>
+          <div class="audio-channel__volume">
+            <input type="range" id="sys-volume" min="0" max="100" value="80" aria-label="System audio volume" />
+            <span id="sys-volume-value">80</span>
+          </div>
+          <div class="peak-meter" id="sys-peak">
+            <div class="peak-meter__bar" id="sys-peak-bar"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel__section">
+        <label class="panel__label">Push-to-Talk</label>
+        <label class="switch">
+          <input type="checkbox" id="ptt-enable" />
+          <span>Enable push-to-talk (hold Space)</span>
+        </label>
+        <input type="text" id="ptt-key" value="Space" placeholder="Key" class="panel__select" aria-label="Push-to-talk key" />
+      </div>
+
+      <div class="panel__section">
+        <label class="panel__label">Background Music</label>
+        <button class="record-btn" id="bgm-browse" style="background: var(--color-primary);">Browse Music</button>
+        <input type="file" id="bgm-file" accept="audio/*" hidden aria-label="Background music file" />
+        <div class="audio-channel__volume">
+          <input type="range" id="bgm-volume" min="0" max="100" value="30" aria-label="Background music volume" />
+          <span id="bgm-volume-value">30</span>
+        </div>
+        <p class="hint-text">Music auto-ducks when you speak (ducking enabled on mic).</p>
+      </div>
+
+      <div class="panel__section">
+        <label class="panel__label">Audio Effects</label>
+        <select id="voice-fx" class="panel__select" aria-label="Voice effect">
+          <option value="none">No effect (natural)</option>
+          <option value="deep">Deep voice</option>
+          <option value="high">High pitch</option>
+          <option value="robot">Robot</option>
+          <option value="echo">Echo</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- SCENES TAB (OBS-style) -->
+    <div class="panel__tab" data-tab="scenes" hidden>
+      <h3 class="panel__title">Scenes &amp; Sources</h3>
+
+      <div class="panel__section">
+        <label class="panel__label">Scenes</label>
+        <ul class="scene-list" id="scene-list">
+          <li class="scene-item active" data-scene="default">Default Scene</li>
+        </ul>
+        <div class="scene-controls">
+          <button class="record-btn" id="scene-add" style="background: var(--color-primary); padding: 6px;">+ Add Scene</button>
+          <button class="record-btn" id="scene-duplicate" style="background: var(--color-text); padding: 6px;">Duplicate</button>
+        </div>
+      </div>
+
+      <div class="panel__section">
+        <label class="panel__label">Sources in Current Scene</label>
+        <ul class="source-list" id="source-list">
+          <li class="recording-list__empty">No sources added</li>
+        </ul>
+        <button class="record-btn" id="source-add" style="background: var(--color-primary); padding: 6px; margin-top: 4px;">+ Add Source</button>
+      </div>
+
+      <div class="panel__section">
+        <label class="panel__label">Live Stream (RTMP)</label>
+        <input type="text" id="rtmp-url" placeholder="rtmp://server/live" class="panel__select" aria-label="RTMP stream URL" />
+        <input type="text" id="rtmp-key" placeholder="Stream key" class="panel__select" aria-label="RTMP stream key" />
+        <button class="record-btn" id="stream-start" style="background: var(--color-rec);">Start Streaming</button>
+        <button class="record-btn" id="stream-stop" style="background: var(--color-text);" disabled>Stop Streaming</button>
+      </div>
+
+      <div class="panel__section">
+        <label class="panel__label">Virtual Camera</label>
+        <button class="record-btn" id="vcam-start" style="background: var(--color-accent);">Start Virtual Camera</button>
+        <button class="record-btn" id="vcam-stop" style="background: var(--color-text);" disabled>Stop Virtual Camera</button>
+      </div>
+    </div>
+
+    <!-- STATISTICS TAB -->
+    <div class="panel__tab" data-tab="stats" hidden>
+      <h3 class="panel__title">Statistics Dashboard</h3>
+
+      <div class="panel__section stat-grid">
+        <div class="stat-card">
+          <div class="stat-card__value" id="stat-recordings">0</div>
+          <div class="stat-card__label">Total Recordings</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-card__value" id="stat-time">0m</div>
+          <div class="stat-card__label">Total Recording Time</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-card__value" id="stat-storage">0 MB</div>
+          <div class="stat-card__label">Storage Used</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-card__value" id="stat-pages">1</div>
+          <div class="stat-card__label">Pages Created</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-card__value" id="stat-screenshots">0</div>
+          <div class="stat-card__label">Screenshots Taken</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-card__value" id="stat-sessions">1</div>
+          <div class="stat-card__label">App Sessions</div>
+        </div>
+      </div>
+
+      <div class="panel__section">
+        <label class="panel__label">Session Activity</label>
+        <div class="activity-chart" id="activity-chart">
+          <div class="activity-bar" style="height: 30%"></div>
+          <div class="activity-bar" style="height: 60%"></div>
+          <div class="activity-bar" style="height: 45%"></div>
+          <div class="activity-bar" style="height: 80%"></div>
+          <div class="activity-bar" style="height: 20%"></div>
+          <div class="activity-bar" style="height: 55%"></div>
+          <div class="activity-bar" style="height: 90%"></div>
+        </div>
+      </div>
+
+      <div class="panel__section">
+        <button class="record-btn" id="stats-reset" style="background: var(--color-danger); width: 100%;">Reset Statistics</button>
+      </div>
+    </div>
+
+    <!-- SETTINGS TAB -->
+    <div class="panel__tab" data-tab="settings" hidden>
+      <h3 class="panel__title">Settings</h3>
+
+      <div class="panel__section">
+        <label class="panel__label">Theme</label>
+        <div class="theme-grid">
+          <button class="theme-btn active" data-theme="light">☀️ Light</button>
+          <button class="theme-btn" data-theme="dark">🌙 Dark</button>
+          <button class="theme-btn" data-theme="auto">🌓 Auto</button>
+        </div>
+        <label class="panel__label" style="margin-top: 8px;">Accent Color</label>
+        <div class="accent-row">
+          <button class="accent-btn" data-accent="#1a73e8" style="background:#1a73e8"></button>
+          <button class="accent-btn" data-accent="#0f9d58" style="background:#0f9d58"></button>
+          <button class="accent-btn" data-accent="#e8392f" style="background:#e8392f"></button>
+          <button class="accent-btn" data-accent="#9c27b0" style="background:#9c27b0"></button>
+          <button class="accent-btn" data-accent="#ff6f00" style="background:#ff6f00"></button>
+          <button class="accent-btn" data-accent="#00bcd4" style="background:#00bcd4"></button>
+        </div>
+      </div>
+
+      <div class="panel__section">
+        <label class="panel__label">Auto-save</label>
+        <label class="switch">
+          <input type="checkbox" id="set-autosave" checked />
+          <span>Save canvas every 30 seconds</span>
+        </label>
+      </div>
+
+      <div class="panel__section">
+        <label class="panel__label">Overlay Mode</label>
+        <label class="switch">
+          <input type="checkbox" id="set-overlay-clickthrough" />
+          <span>Click-through (Epic Pen style)</span>
+        </label>
+        <label class="switch">
+          <input type="checkbox" id="set-fading-ink" />
+          <span>Fading ink (annotations auto-disappear)</span>
+        </label>
+      </div>
+
+      <div class="panel__section">
+        <label class="panel__label">Performance</label>
+        <label class="switch">
+          <input type="checkbox" id="set-hw-accel" checked />
+          <span>Hardware acceleration</span>
+        </label>
+        <label class="switch">
+          <input type="checkbox" id="set-reduce-fps" />
+          <span>Reduce FPS on battery</span>
+        </label>
+        <label class="switch">
+          <input type="checkbox" id="set-ink-smoothing" checked />
+          <span>Ink smoothing (Bezier curves)</span>
+        </label>
+        <label class="switch">
+          <input type="checkbox" id="set-pressure" checked />
+          <span>Pressure sensitivity (stylus)</span>
+        </label>
+        <label class="switch">
+          <input type="checkbox" id="set-touch-gestures" checked />
+          <span>Touch gestures (pinch zoom, 2-finger erase)</span>
+        </label>
+      </div>
+
+      <div class="panel__section">
+        <label class="panel__label">Cloud Sync</label>
+        <label class="switch">
+          <input type="checkbox" id="set-cloud-sync" />
+          <span>Auto-sync recordings to cloud</span>
+        </label>
+        <select id="cloud-provider" class="panel__select" aria-label="Cloud storage provider">
+          <option value="none">Select provider...</option>
+          <option value="gdrive">Google Drive</option>
+          <option value="onedrive">Microsoft OneDrive</option>
+          <option value="dropbox">Dropbox</option>
+        </select>
+        <button class="record-btn" id="cloud-connect" style="background: var(--color-primary); padding: 6px;">Connect Account</button>
+      </div>
+
+      <div class="panel__section">
+        <label class="panel__label">Updates</label>
+        <label class="switch">
+          <input type="checkbox" id="set-autoupdate" checked />
+          <span>Auto-check for updates</span>
+        </label>
+        <button class="record-btn" id="check-update" style="background: var(--color-primary); padding: 6px;">Check Now</button>
+        <p class="hint-text" id="update-status">Version 1.0.0 — up to date</p>
+      </div>
+
+      <div class="panel__section">
+        <label class="panel__label">Hotkeys (click to customize)</label>
+        <ul class="hotkey-list" id="hotkey-list">
+          <li><span>Pen</span><kbd data-action="pen">Ctrl+Shift+P</kbd></li>
+          <li><span>Highlighter</span><kbd data-action="highlighter">Ctrl+Shift+H</kbd></li>
+          <li><span>Eraser</span><kbd data-action="eraser">Ctrl+Shift+E</kbd></li>
+          <li><span>Text</span><kbd data-action="text">T</kbd></li>
+          <li><span>Toggle Recording</span><kbd data-action="recording">Ctrl+Shift+R</kbd></li>
+          <li><span>Screenshot</span><kbd data-action="screenshot">Ctrl+Shift+S</kbd></li>
+          <li><span>Snipping Tool</span><kbd data-action="snipping">Ctrl+Shift+X</kbd></li>
+          <li><span>Overlay Mode</span><kbd data-action="overlay">Ctrl+Shift+O</kbd></li>
+          <li><span>Laser Pointer</span><kbd data-action="laser">L</kbd></li>
+          <li><span>Undo</span><kbd data-action="undo">Ctrl+Z</kbd></li>
+          <li><span>Redo</span><kbd data-action="redo">Ctrl+Y</kbd></li>
+          <li><span>New Page</span><kbd data-action="newpage">Ctrl+N</kbd></li>
+          <li><span>PDF Export</span><kbd data-action="pdf">Ctrl+Shift+E</kbd></li>
+          <li><span>Print</span><kbd data-action="print">Ctrl+P</kbd></li>
+        </ul>
+        <p class="hint-text">Click any hotkey to re-bind it.</p>
+      </div>
+
+      <div class="panel__section">
+        <label class="panel__label">System Info</label>
+        <div id="sys-info-box" class="sys-info-box">Loading...</div>
+      </div>
+    </div>
+
+    <!-- TABS -->
+    <nav class="panel__nav">
+      <button class="panel__nav-btn active" data-tab-target="recording" title="Recording">Rec</button>
+      <button class="panel__nav-btn" data-tab-target="audio" title="Audio Mixer">Aud</button>
+      <button class="panel__nav-btn" data-tab-target="scenes" title="Scenes & Streaming">Scn</button>
+      <button class="panel__nav-btn" data-tab-target="stats" title="Statistics">Stat</button>
+      <button class="panel__nav-btn" data-tab-target="settings" title="Settings">Set</button>
+    </nav>
+  </aside>
+
+  <!-- ============ TOAST NOTIFICATIONS ============ -->
+  <div class="toast-container" id="toast-container"></div>
+
+  <!-- ============ PROFESSIONAL SPLASH SCREEN (App Startup) ============ -->
+  <div class="splash-screen" id="splash-screen">
+    <div class="splash-screen__bg-pattern"></div>
+    <div class="splash-screen__inner">
+
+      <!-- App Logo (PNG image with glow) -->
+      <div class="splash-screen__logo-wrapper">
+        <div class="splash-screen__logo-glow"></div>
+        <img src="assets/icon.png" alt="PENLIVE Logo" class="splash-screen__logo-img" />
+      </div>
+
+      <!-- App Name -->
+      <h1 class="splash-screen__title">PENLIVE</h1>
+      <p class="splash-screen__tagline">Professional Drawing &amp; Recording Studio</p>
+
+      <!-- Author (prominent) -->
+      <div class="splash-screen__author-block">
+        <div class="splash-screen__author-line"></div>
+        <p class="splash-screen__author">Er. Raju Kumawat</p>
+        <div class="splash-screen__author-line"></div>
+      </div>
+
+      <!-- Version -->
+      <p class="splash-screen__version">Version 1.0.0 · Professional Edition</p>
+
+      <!-- Loading Progress -->
+      <div class="splash-screen__progress">
+        <div class="splash-screen__progress-bar" id="splash-progress-bar"></div>
+      </div>
+      <p class="splash-screen__loading" id="splash-loading-text">Initializing PENLIVE...</p>
+
+      <!-- Copyright Footer -->
+      <p class="splash-screen__copyright">© 2026 Er. Raju Kumawat. All rights reserved.</p>
+    </div>
+  </div>
+
+  <!-- ============ WELCOME / ONBOARDING (first-time users) ============ -->
+  <div class="welcome-overlay" id="welcome-overlay" hidden>
+    <div class="welcome-card">
+      <div class="welcome-card__logo">✏️</div>
+      <h2 class="welcome-card__title">Welcome to PENLIVE</h2>
+      <p class="welcome-card__subtitle">Lightweight Writing · Recording · Whiteboard · Overlay<br>by Er. Raju Kumawat</p>
+      <div class="welcome-card__features">
+        <div class="welcome-card__feature"><span class="welcome-card__feature-icon">✏️</span> 15+ Drawing Tools</div>
+        <div class="welcome-card__feature"><span class="welcome-card__feature-icon">🎬</span> Screen + Webcam + Mic Recording</div>
+        <div class="welcome-card__feature"><span class="welcome-card__feature-icon">🎙</span> External Mic Support</div>
+        <div class="welcome-card__feature"><span class="welcome-card__feature-icon">🖥</span> Multi-Monitor Recording</div>
+        <div class="welcome-card__feature"><span class="welcome-card__feature-icon">🔦</span> Epic Pen-style Overlay</div>
+        <div class="welcome-card__feature"><span class="welcome-card__feature-icon">📋</span> Multi-page Smart Board</div>
+        <div class="welcome-card__feature"><span class="welcome-card__feature-icon">📑</span> PDF Export + Print</div>
+        <div class="welcome-card__feature"><span class="welcome-card__feature-icon">📊</span> Statistics Dashboard</div>
+      </div>
+      <div class="welcome-card__actions">
+        <button class="welcome-card__btn welcome-card__btn--primary" id="welcome-start">Start Drawing →</button>
+        <button class="welcome-card__btn welcome-card__btn--secondary" id="welcome-tour">Quick Tour</button>
+        <button class="welcome-card__btn welcome-card__btn--secondary" id="welcome-skip">Skip</button>
+      </div>
+      <div class="welcome-card__footer">Press <kbd>?</kbd> anytime to see shortcuts · © Er. Raju Kumawat</div>
+    </div>
+  </div>
+
+  <!-- ============ KEYBOARD SHORTCUTS OVERLAY ============ -->
+  <div class="shortcuts-overlay" id="shortcuts-overlay" hidden>
+    <div class="shortcuts-card">
+      <h2 class="shortcuts-card__title">⌨️ Keyboard Shortcuts</h2>
+      <div class="shortcuts-grid">
+        <div class="shortcuts-section">
+          <h4>Drawing Tools</h4>
+          <ul class="shortcuts-list">
+            <li><span>Pen</span><kbd>P</kbd></li>
+            <li><span>Highlighter</span><kbd>H</kbd></li>
+            <li><span>Eraser</span><kbd>E</kbd></li>
+            <li><span>Text</span><kbd>T</kbd></li>
+            <li><span>Line</span><kbd>L</kbd></li>
+            <li><span>Rectangle</span><kbd>R</kbd></li>
+            <li><span>Circle</span><kbd>C</kbd></li>
+            <li><span>Arrow</span><kbd>A</kbd></li>
+            <li><span>Laser Pointer</span><kbd>Shift+L</kbd></li>
+          </ul>
+        </div>
+        <div class="shortcuts-section">
+          <h4>File Actions</h4>
+          <ul class="shortcuts-list">
+            <li><span>New Page</span><kbd>Ctrl+N</kbd></li>
+            <li><span>Undo</span><kbd>Ctrl+Z</kbd></li>
+            <li><span>Redo</span><kbd>Ctrl+Y</kbd></li>
+            <li><span>Screenshot</span><kbd>Ctrl+Shift+S</kbd></li>
+            <li><span>Snipping Tool</span><kbd>Ctrl+Shift+X</kbd></li>
+            <li><span>PDF Export</span><kbd>Ctrl+Shift+E</kbd></li>
+            <li><span>Print</span><kbd>Ctrl+P</kbd></li>
+          </ul>
+        </div>
+        <div class="shortcuts-section">
+          <h4>Recording</h4>
+          <ul class="shortcuts-list">
+            <li><span>Toggle Recording</span><kbd>Ctrl+Shift+R</kbd></li>
+            <li><span>Pause/Resume</span><kbd>Ctrl+Shift+Space</kbd></li>
+          </ul>
+        </div>
+        <div class="shortcuts-section">
+          <h4>View &amp; Mode</h4>
+          <ul class="shortcuts-list">
+            <li><span>Command Palette</span><kbd>Ctrl+K</kbd></li>
+            <li><span>Overlay Mode</span><kbd>Ctrl+Shift+O</kbd></li>
+            <li><span>Toggle Theme</span><kbd>Ctrl+Shift+T</kbd></li>
+            <li><span>This Help</span><kbd>?</kbd></li>
+            <li><span>Exit Overlay</span><kbd>Esc</kbd></li>
+          </ul>
+        </div>
+      </div>
+      <button class="shortcuts-card__close" id="shortcuts-close">Got it</button>
+    </div>
+  </div>
+
+  <!-- ============ CONTEXT MENU (right-click) ============ -->
+  <div class="context-menu" id="context-menu" hidden>
+    <div class="context-menu__header">Quick Actions</div>
+    <div class="context-menu__item" data-action="undo">
+      <span class="context-menu__item-icon">↶</span>
+      <span>Undo</span>
+      <span class="context-menu__item-shortcut">Ctrl+Z</span>
+    </div>
+    <div class="context-menu__item" data-action="redo">
+      <span class="context-menu__item-icon">↷</span>
+      <span>Redo</span>
+      <span class="context-menu__item-shortcut">Ctrl+Y</span>
+    </div>
+    <div class="context-menu__separator"></div>
+    <div class="context-menu__item" data-action="pen">
+      <span class="context-menu__item-icon">✏️</span>
+      <span>Pen</span>
+      <span class="context-menu__item-shortcut">P</span>
+    </div>
+    <div class="context-menu__item" data-action="highlighter">
+      <span class="context-menu__item-icon">🖍️</span>
+      <span>Highlighter</span>
+      <span class="context-menu__item-shortcut">H</span>
+    </div>
+    <div class="context-menu__item" data-action="eraser">
+      <span class="context-menu__item-icon">🧽</span>
+      <span>Eraser</span>
+      <span class="context-menu__item-shortcut">E</span>
+    </div>
+    <div class="context-menu__item" data-action="text">
+      <span class="context-menu__item-icon">T</span>
+      <span>Text</span>
+      <span class="context-menu__item-shortcut">T</span>
+    </div>
+    <div class="context-menu__separator"></div>
+    <div class="context-menu__item" data-action="screenshot">
+      <span class="context-menu__item-icon">📷</span>
+      <span>Screenshot</span>
+      <span class="context-menu__item-shortcut">Ctrl+Shift+S</span>
+    </div>
+    <div class="context-menu__item" data-action="snipping">
+      <span class="context-menu__item-icon">✂️</span>
+      <span>Snip Region</span>
+      <span class="context-menu__item-shortcut">Ctrl+Shift+X</span>
+    </div>
+    <div class="context-menu__item" data-action="record">
+      <span class="context-menu__item-icon">🔴</span>
+      <span>Start Recording</span>
+      <span class="context-menu__item-shortcut">Ctrl+Shift+R</span>
+    </div>
+    <div class="context-menu__separator"></div>
+    <div class="context-menu__item" data-action="clear">
+      <span class="context-menu__item-icon">🗑️</span>
+      <span>Clear Canvas</span>
+    </div>
+    <div class="context-menu__item" data-action="shortcuts">
+      <span class="context-menu__item-icon">⌨️</span>
+      <span>Show Shortcuts</span>
+      <span class="context-menu__item-shortcut">?</span>
+    </div>
+  </div>
+
+  <!-- ============ ABOUT MODAL ============ -->
+  <div class="modal" id="about-modal" hidden>
+    <div class="modal__content">
+      <div class="modal__logo">
+        <img src="assets/icon-128.png" alt="PENLIVE" width="96" height="96" />
+      </div>
+      <h2>PENLIVE</h2>
+      <p class="modal__version">Version 1.0.0 · Professional Edition</p>
+      <div class="modal__author-block">
+        <div class="modal__author-line"></div>
+        <p class="modal__author">Er. Raju Kumawat</p>
+        <div class="modal__author-line"></div>
+      </div>
+      <p class="modal__copyright">© 2026 Er. Raju Kumawat.<br>All rights reserved.</p>
+      <p class="modal__desc">Lightweight desktop application with writing tools, screen recording, webcam, microphone support, smart board, and Epic Pen-style overlay features.</p>
+      <div class="modal__features">
+        <span>✏️ Drawing</span>
+        <span>🎬 Recording</span>
+        <span>🎓 Live Class</span>
+        <span>🌐 Browser</span>
+        <span>📑 PDF Export</span>
+        <span>📊 Statistics</span>
+      </div>
+      <button class="modal__close" id="about-close">Close</button>
+    </div>
+  </div>
+
+  <!-- ============ SCRIPTS ============ -->
+  <script type="module" src="main.js"></script>
+</body>
+</html>

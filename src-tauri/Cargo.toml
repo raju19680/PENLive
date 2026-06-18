@@ -1,0 +1,39 @@
+[package]
+name = "penlive"
+version = "1.0.0"
+description = "PENLIVE - Lightweight Desktop Application with Writing Tools, Screen Recording, Webcam & Smart Board"
+authors = ["Er. Raju Kumawat"]
+license = "MIT"
+repository = ""
+default-run = "penlive"
+edition = "2021"
+rust-version = "1.70"
+
+[build-dependencies]
+tauri-build = { version = "2.0", features = [] }
+
+[dependencies]
+tauri = { version = "2.0", features = [] }
+tauri-plugin-dialog = "2.0"
+tauri-plugin-fs = "2.0"
+tauri-plugin-shell = "2.0"
+tauri-plugin-window-state = "2.0"
+tauri-plugin-os = "2.0"
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+window-vibrancy = "0.5"
+sysinfo = "0.30"
+chrono = "0.4"
+
+[features]
+custom-protocol = ["tauri/custom-protocol"]
+
+[profile.release]
+panic = "abort"
+codegen-units = 1
+lto = true
+opt-level = "s"
+strip = true
+
+[profile.dev]
+opt-level = 1

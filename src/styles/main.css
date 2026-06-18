@@ -1,0 +1,727 @@
+/* ============================================================
+   PENLIVE - Main Stylesheet
+   Copyright (c) 2026 Er. Raju Kumawat. All rights reserved.
+   Theme: Light Clean (Microsoft Whiteboard inspired)
+   ============================================================ */
+
+:root {
+  /* Color Palette - Light Clean */
+  --color-bg: #f7f9fc;
+  --color-surface: #ffffff;
+  --color-surface-alt: #f1f4f9;
+  --color-border: #e1e6ed;
+  --color-border-strong: #c8d0db;
+  --color-text: #1a2332;
+  --color-text-secondary: #5b6779;
+  --color-text-tertiary: #8a94a5;
+  --color-primary: #1a73e8;
+  --color-primary-hover: #1557b0;
+  --color-primary-light: #e8f0fe;
+  --color-accent: #0f9d58;
+  --color-danger: #e8392f;
+  --color-warning: #f5a623;
+  --color-rec: #e8392f;
+
+  /* Typography */
+  --font-sans: 'Segoe UI', -apple-system, BlinkMacSystemFont, system-ui, 'Inter', sans-serif;
+  --font-mono: 'Cascadia Code', 'Fira Code', Consolas, monospace;
+  --fs-xs: 11px;
+  --fs-sm: 12px;
+  --fs-base: 14px;
+  --fs-md: 15px;
+  --fs-lg: 18px;
+  --fs-xl: 24px;
+
+  /* Spacing */
+  --sp-1: 4px;
+  --sp-2: 8px;
+  --sp-3: 12px;
+  --sp-4: 16px;
+  --sp-5: 20px;
+  --sp-6: 24px;
+
+  /* Radius */
+  --r-sm: 4px;
+  --r-md: 6px;
+  --r-lg: 8px;
+  --r-xl: 12px;
+  --r-full: 999px;
+
+  /* Shadows */
+  --shadow-sm: 0 1px 2px rgba(20, 35, 65, 0.06);
+  --shadow-md: 0 2px 8px rgba(20, 35, 65, 0.08);
+  --shadow-lg: 0 8px 24px rgba(20, 35, 65, 0.12);
+
+  /* Layout */
+  --titlebar-h: 48px;
+  --toolbar-w: 64px;
+  --panel-w: 280px;
+  --statusbar-h: 28px;
+  --transition-fast: 120ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-base: 200ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* BUGFIX: HTML hidden attribute must always override any display rule.
+   Otherwise elements like .modal, .video-player, .text-input, .welcome-overlay
+   (which use display: flex/block in CSS) would stay visible despite hidden attribute.
+   Note: Use specific selector to avoid CSS minifier mangling [hidden]. */
+[hidden],
+div[hidden],
+button[hidden],
+span[hidden] {
+  display: none !important;
+}
+
+html, body {
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  font-family: var(--font-sans);
+  font-size: var(--fs-base);
+  color: var(--color-text);
+  background: var(--color-bg);
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+body {
+  display: grid;
+  grid-template-columns: var(--toolbar-w) 1fr var(--panel-w);
+  grid-template-rows: var(--titlebar-h) 1fr;
+  grid-template-areas:
+    "titlebar titlebar titlebar"
+    "toolbar  canvas  panel";
+  height: 100vh;
+}
+
+button {
+  font-family: inherit;
+  font-size: inherit;
+  color: inherit;
+  background: none;
+  border: none;
+  cursor: pointer;
+  outline: none;
+}
+
+button:active {
+  transform: scale(0.96);
+}
+
+input, select {
+  font-family: inherit;
+  font-size: var(--fs-sm);
+}
+
+kbd {
+  display: inline-block;
+  padding: 2px 6px;
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  background: var(--color-surface-alt);
+  border: 1px solid var(--color-border);
+  border-radius: var(--r-sm);
+  color: var(--color-text-secondary);
+}
+
+/* ============================================================
+   SCROLLBARS
+   ============================================================ */
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb {
+  background: var(--color-border-strong);
+  border-radius: var(--r-full);
+}
+::-webkit-scrollbar-thumb:hover { background: var(--color-text-tertiary); }
+
+/* ============================================================
+   TITLE BAR
+   ============================================================ */
+.titlebar {
+  grid-area: titlebar;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 var(--sp-4);
+  background: var(--color-surface);
+  border-bottom: 1px solid var(--color-border);
+  box-shadow: var(--shadow-sm);
+  z-index: 100;
+}
+
+.titlebar__left {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+}
+
+.titlebar__logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  background: linear-gradient(135deg, var(--color-primary), var(--color-accent));
+  border-radius: var(--r-md);
+  color: #fff;
+}
+
+.titlebar__title {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.1;
+}
+
+.titlebar__name {
+  font-size: var(--fs-md);
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  color: var(--color-text);
+}
+
+.titlebar__author {
+  font-size: var(--fs-xs);
+  color: var(--color-text-tertiary);
+}
+
+.titlebar__center,
+.titlebar__right {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-1);
+}
+
+.tb-btn {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-1);
+  padding: 6px 10px;
+  border-radius: var(--r-md);
+  color: var(--color-text-secondary);
+  transition: var(--transition-fast);
+}
+
+.tb-btn:hover {
+  background: var(--color-surface-alt);
+  color: var(--color-text);
+}
+
+.tb-btn--accent {
+  background: var(--color-rec);
+  color: #fff;
+}
+
+.tb-btn--accent:hover {
+  background: #c12e26;
+  color: #fff;
+}
+
+.tb-btn--accent.recording {
+  background: var(--color-rec);
+  animation: pulse 1.4s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(232, 57, 47, 0.6); }
+  50% { box-shadow: 0 0 0 6px rgba(232, 57, 47, 0); }
+}
+
+.rec-dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  background: currentColor;
+  border-radius: 50%;
+}
+
+.rec-dot--active {
+  background: #fff;
+  animation: blink 1s infinite;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+
+/* ============================================================
+   MAIN CANVAS AREA
+   ============================================================ */
+.canvas-area {
+  grid-area: canvas;
+  position: relative;
+  background: var(--color-surface);
+  overflow: hidden;
+}
+
+#board-canvas,
+#preview-canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  cursor: crosshair;
+}
+
+#preview-canvas {
+  pointer-events: none;
+  z-index: 5;
+}
+
+#board-canvas {
+  z-index: 1;
+  background: #ffffff;
+  background-image:
+    linear-gradient(rgba(180, 195, 215, 0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(180, 195, 215, 0.08) 1px, transparent 1px);
+  background-size: 20px 20px;
+}
+
+/* ============================================================
+   STATUS BAR
+   ============================================================ */
+.statusbar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: var(--statusbar-h);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 var(--sp-3);
+  background: var(--color-surface);
+  border-top: 1px solid var(--color-border);
+  font-size: var(--fs-xs);
+  color: var(--color-text-secondary);
+  z-index: 50;
+}
+
+.statusbar__left,
+.statusbar__center,
+.statusbar__right {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+}
+
+.status-btn {
+  padding: 2px 8px;
+  border-radius: var(--r-sm);
+  color: var(--color-text-secondary);
+  font-size: var(--fs-sm);
+}
+
+.status-btn:hover {
+  background: var(--color-surface-alt);
+}
+
+#autosave-status {
+  color: var(--color-accent);
+  font-size: var(--fs-xs);
+}
+
+/* ============================================================
+   WEBCAM PIP
+   ============================================================ */
+.webcam-pip {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 220px;
+  height: 165px;
+  background: #000;
+  border-radius: var(--r-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-lg);
+  cursor: move;
+  z-index: 30;
+  display: none;
+}
+
+.webcam-pip.active { display: block; }
+
+.webcam-pip video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.webcam-pip__header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 var(--sp-2);
+  background: linear-gradient(to bottom, rgba(0,0,0,0.6), transparent);
+  color: #fff;
+  font-size: var(--fs-xs);
+}
+
+.webcam-pip__close {
+  color: #fff;
+  font-size: 16px;
+  width: 18px;
+  height: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.webcam-pip__resize {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 14px;
+  height: 14px;
+  cursor: nwse-resize;
+  background: linear-gradient(135deg, transparent 50%, rgba(255,255,255,0.6) 50%);
+}
+
+/* ============================================================
+   DRAG-DROP VIDEO ZONE
+   ============================================================ */
+.dropzone {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 360px;
+  padding: var(--sp-6);
+  border: 2px dashed var(--color-border-strong);
+  border-radius: var(--r-xl);
+  background: var(--color-surface);
+  text-align: center;
+  color: var(--color-text-secondary);
+  display: none;
+  z-index: 20;
+}
+
+.dropzone.active { display: block; }
+
+.dropzone.dragover {
+  border-color: var(--color-primary);
+  background: var(--color-primary-light);
+}
+
+.dropzone__inner svg {
+  color: var(--color-text-tertiary);
+  margin-bottom: var(--sp-3);
+}
+
+.dropzone__inner p {
+  margin-bottom: var(--sp-1);
+  font-size: var(--fs-base);
+}
+
+.dropzone__browse {
+  color: var(--color-primary);
+  text-decoration: underline;
+  font-weight: 600;
+}
+
+.dropzone__hint {
+  font-size: var(--fs-xs);
+  color: var(--color-text-tertiary);
+}
+
+/* ============================================================
+   VIDEO PLAYER (for dropped videos)
+   ============================================================ */
+.video-player {
+  position: absolute;
+  inset: 20px;
+  background: rgba(0, 0, 0, 0.92);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 60;
+  border-radius: var(--r-md);
+}
+
+.video-player video {
+  max-width: 95%;
+  max-height: 95%;
+  border-radius: var(--r-md);
+}
+
+.video-player__close {
+  position: absolute;
+  top: var(--sp-3);
+  right: var(--sp-3);
+  width: 36px;
+  height: 36px;
+  background: rgba(255,255,255,0.15);
+  color: #fff;
+  border-radius: 50%;
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.video-player__close:hover {
+  background: rgba(255,255,255,0.3);
+}
+
+/* ============================================================
+   STICKY NOTES
+   ============================================================ */
+.sticky-container {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 15;
+}
+
+.sticky-note {
+  position: absolute;
+  width: 200px;
+  min-height: 160px;
+  padding: var(--sp-3);
+  background: #fff9c4;
+  box-shadow: var(--shadow-md);
+  border-radius: var(--r-sm);
+  pointer-events: auto;
+  cursor: move;
+  font-size: var(--fs-sm);
+  color: #5d4037;
+}
+
+.sticky-note__textarea {
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  border: none;
+  outline: none;
+  resize: none;
+  font-family: var(--font-sans);
+  font-size: var(--fs-sm);
+  color: inherit;
+}
+
+.sticky-note__close {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  width: 18px;
+  height: 18px;
+  background: rgba(0,0,0,0.1);
+  border-radius: 50%;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ============================================================
+   TEXT INPUT (for text tool)
+   ============================================================ */
+.text-input {
+  position: absolute;
+  padding: 2px 6px;
+  border: 1px dashed var(--color-primary);
+  background: rgba(255,255,255,0.95);
+  border-radius: var(--r-sm);
+  font-size: var(--fs-md);
+  color: var(--color-text);
+  outline: none;
+  z-index: 25;
+}
+
+/* ============================================================
+   TOAST
+   ============================================================ */
+.toast-container {
+  position: fixed;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-2);
+}
+
+.toast {
+  padding: var(--sp-3) var(--sp-4);
+  background: var(--color-text);
+  color: #fff;
+  border-radius: var(--r-md);
+  box-shadow: var(--shadow-lg);
+  font-size: var(--fs-sm);
+  animation: slideUp 200ms ease-out;
+  max-width: 400px;
+}
+
+.toast--success { background: var(--color-accent); }
+.toast--error   { background: var(--color-danger); }
+.toast--info    { background: var(--color-primary); }
+
+@keyframes slideUp {
+  from { transform: translateY(20px); opacity: 0; }
+  to   { transform: translateY(0); opacity: 1; }
+}
+
+/* ============================================================
+   MODAL
+   ============================================================ */
+.modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(20, 35, 65, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  animation: fadeIn 200ms;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.modal__content {
+  background: var(--color-surface);
+  padding: var(--sp-6);
+  border-radius: var(--r-xl);
+  text-align: center;
+  max-width: 460px;
+  box-shadow: var(--shadow-lg);
+}
+
+.modal__logo {
+  width: 80px;
+  height: 80px;
+  margin: 0 auto var(--sp-3);
+  background: linear-gradient(135deg, var(--color-primary), var(--color-accent));
+  border-radius: var(--r-lg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  box-shadow: 0 8px 24px rgba(26, 115, 232, 0.3);
+}
+
+.modal__content h2 {
+  font-size: var(--fs-xl);
+  color: var(--color-primary);
+  margin-bottom: var(--sp-1);
+  letter-spacing: 2px;
+  font-weight: 800;
+}
+
+.modal__version {
+  color: var(--color-text-secondary);
+  font-size: var(--fs-xs);
+  margin-bottom: var(--sp-3);
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.modal__author-block {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: var(--sp-3);
+}
+
+.modal__author-line {
+  flex: 1;
+  max-width: 50px;
+  height: 1px;
+  background: linear-gradient(to right, transparent, var(--color-border-strong), transparent);
+}
+
+.modal__author {
+  font-weight: 700;
+  font-size: var(--fs-md);
+  color: var(--color-text);
+  margin: 0;
+  letter-spacing: 0.5px;
+}
+
+.modal__copyright {
+  font-size: var(--fs-xs);
+  color: var(--color-text-tertiary);
+  margin-bottom: var(--sp-3);
+  line-height: 1.5;
+}
+
+.modal__desc {
+  font-size: var(--fs-sm);
+  color: var(--color-text-secondary);
+  margin-bottom: var(--sp-3);
+  line-height: 1.5;
+}
+
+.modal__features {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  justify-content: center;
+  margin-bottom: var(--sp-4);
+}
+
+.modal__features span {
+  padding: 4px 10px;
+  background: var(--color-surface-alt);
+  border: 1px solid var(--color-border);
+  border-radius: var(--r-full);
+  font-size: var(--fs-xs);
+  color: var(--color-text-secondary);
+  font-weight: 500;
+}
+
+.modal__close {
+  padding: var(--sp-2) var(--sp-4);
+  background: var(--color-primary);
+  color: #fff;
+  border-radius: var(--r-md);
+  font-weight: 600;
+}
+
+.modal__close:hover {
+  background: var(--color-primary-hover);
+}
+
+/* ============================================================
+   OVERLAY MODE (Epic Pen style)
+   ============================================================ */
+body[data-mode="overlay"] {
+  background: transparent !important;
+}
+
+body[data-mode="overlay"] .titlebar,
+body[data-mode="overlay"] .toolbar,
+body[data-mode="overlay"] .panel,
+body[data-mode="overlay"] .statusbar {
+  display: none;
+}
+
+body[data-mode="overlay"] {
+  display: block;
+}
+
+body[data-mode="overlay"] #board-canvas {
+  background: transparent !important;
+  background-image: none !important;
+}
+
+body[data-mode="overlay"] .canvas-area {
+  background: transparent !important;
+}

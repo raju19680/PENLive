@@ -1,0 +1,627 @@
+/* ============================================================
+   PENLIVE - Advanced Features Styles
+   Copyright (c) 2026 Er. Raju Kumawat. All rights reserved.
+   ============================================================ */
+
+/* Title bar divider */
+.tb-divider {
+  width: 1px;
+  height: 20px;
+  background: var(--color-border);
+  margin: 0 4px;
+}
+
+/* ============================================================
+   DARK THEME
+   ============================================================ */
+body.theme-dark {
+  --color-bg: #0f1419;
+  --color-surface: #1a1f29;
+  --color-surface-alt: #232936;
+  --color-border: #2d3543;
+  --color-border-strong: #3d4859;
+  --color-text: #e1e6ed;
+  --color-text-secondary: #9aa4b5;
+  --color-text-tertiary: #6b7585;
+  --color-primary-light: #1e2a3f;
+}
+
+body.theme-dark #board-canvas {
+  background: #1a1f29;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+  background-size: 20px 20px;
+}
+
+body.theme-dark .sticky-note {
+  color: #fff;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+}
+
+/* ============================================================
+   RECENT COLORS
+   ============================================================ */
+.recent-colors {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2px;
+  padding: 4px 0;
+  min-height: 12px;
+}
+
+.recent-colors .recent-swatch {
+  width: 12px;
+  height: 12px;
+  border-radius: 2px;
+  border: 1px solid var(--color-border);
+  cursor: pointer;
+}
+
+/* ============================================================
+   LASER CANVAS
+   ============================================================ */
+#laser-canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 25;
+}
+
+/* ============================================================
+   SNIPPING TOOL OVERLAY
+   ============================================================ */
+.snipping-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 200;
+  cursor: crosshair;
+}
+
+.snipping-overlay .snipping-mask {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.snipping-overlay .snipping-selection {
+  position: absolute;
+  border: 2px dashed var(--color-primary);
+  background: transparent;
+  box-shadow: 0 0 0 9999px rgba(0, 0, 0, 0.5);
+}
+
+.snipping-toolbar {
+  position: absolute;
+  display: flex;
+  gap: 4px;
+  background: var(--color-surface);
+  padding: 4px;
+  border-radius: var(--r-md);
+  box-shadow: var(--shadow-md);
+}
+
+.snipping-toolbar button {
+  width: 32px;
+  height: 32px;
+  border-radius: var(--r-sm);
+  font-size: 16px;
+}
+
+.snipping-toolbar button:hover {
+  background: var(--color-surface-alt);
+}
+
+/* ============================================================
+   SPOTLIGHT OVERLAY
+   ============================================================ */
+.spotlight-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 199;
+  pointer-events: none;
+  background: rgba(0, 0, 0, 0.75);
+}
+
+.spotlight-overlay .spotlight-hole {
+  position: absolute;
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  background: transparent;
+  box-shadow: 0 0 0 9999px rgba(0, 0, 0, 0.75);
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+}
+
+/* ============================================================
+   MAGNIFIER LENS
+   ============================================================ */
+.magnifier-lens {
+  position: absolute;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  border: 4px solid var(--color-primary);
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 198;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.3), inset 0 0 0 1px rgba(255,255,255,0.3);
+}
+
+.magnifier-lens canvas {
+  width: 100%;
+  height: 100%;
+}
+
+/* ============================================================
+   CURSOR EFFECTS
+   ============================================================ */
+.cursor-fx-layer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 197;
+}
+
+.cursor-highlight {
+  position: absolute;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: rgba(255, 214, 10, 0.3);
+  border: 2px solid rgba(255, 214, 10, 0.6);
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  transition: opacity 100ms;
+}
+
+.cursor-click-ripple {
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: 2px solid var(--color-rec);
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  animation: ripple 600ms ease-out forwards;
+}
+
+@keyframes ripple {
+  0%   { opacity: 1; width: 20px; height: 20px; }
+  100% { opacity: 0; width: 80px; height: 80px; }
+}
+
+/* ============================================================
+   FLOATING PANELS (Cursor FX, Templates, Stamps)
+   ============================================================ */
+.floating-panel {
+  position: absolute;
+  top: 60px;
+  right: 20px;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--r-lg);
+  padding: 12px;
+  box-shadow: var(--shadow-lg);
+  z-index: 100;
+  width: 240px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.floating-panel h4 {
+  margin: 0 0 4px 0;
+  font-size: var(--fs-sm);
+  color: var(--color-text);
+  border-bottom: 1px solid var(--color-border);
+  padding-bottom: 4px;
+}
+
+.floating-panel label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: var(--fs-xs);
+  color: var(--color-text-secondary);
+  cursor: pointer;
+}
+
+.floating-panel input[type="range"] {
+  flex: 1;
+}
+
+.template-grid,
+.stamp-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 4px;
+}
+
+.template-grid {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.stamp-grid {
+  grid-template-columns: repeat(4, 1fr);
+}
+
+.template-btn,
+.stamp-btn {
+  padding: 8px 6px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--r-sm);
+  background: var(--color-surface);
+  font-size: var(--fs-xs);
+  cursor: pointer;
+  transition: var(--transition-fast);
+}
+
+.template-btn:hover,
+.stamp-btn:hover {
+  border-color: var(--color-primary);
+  background: var(--color-primary-light);
+}
+
+.template-btn.active {
+  background: var(--color-primary);
+  color: #fff;
+  border-color: var(--color-primary);
+}
+
+.stamp-btn {
+  font-size: 20px;
+  padding: 8px 0;
+  text-align: center;
+}
+
+/* ============================================================
+   COUNTDOWN DISPLAY
+   ============================================================ */
+.countdown-display {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 200px;
+  font-weight: 900;
+  color: var(--color-primary);
+  text-shadow: 0 4px 24px rgba(0,0,0,0.3);
+  z-index: 9999;
+  animation: countdownPulse 1s infinite;
+}
+
+@keyframes countdownPulse {
+  0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+  50% { transform: translate(-50%, -50%) scale(1.2); opacity: 0.7; }
+}
+
+/* ============================================================
+   RECORD BUTTON VARIANTS
+   ============================================================ */
+.record-btn--pause {
+  background: var(--color-warning);
+}
+
+.record-btn--pause:hover:not(:disabled) {
+  background: #d68f10;
+}
+
+.record-btn--pause.paused {
+  background: var(--color-accent);
+}
+
+/* ============================================================
+   AUDIO MIXER
+   ============================================================ */
+.audio-channel {
+  padding: 10px;
+  background: var(--color-surface-alt);
+  border-radius: var(--r-md);
+  margin-bottom: 4px;
+}
+
+.audio-channel__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 6px;
+  font-size: var(--fs-sm);
+  font-weight: 600;
+}
+
+.audio-channel__volume {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 6px;
+}
+
+.audio-channel__volume input[type="range"] {
+  flex: 1;
+  height: 4px;
+  appearance: none;
+  background: var(--color-border);
+  border-radius: var(--r-full);
+}
+
+.audio-channel__volume input[type="range"]::-webkit-slider-thumb {
+  appearance: none;
+  width: 14px;
+  height: 14px;
+  background: var(--color-primary);
+  border-radius: 50%;
+  cursor: pointer;
+  border: 2px solid #fff;
+}
+
+.audio-channel__volume span {
+  font-size: var(--fs-xs);
+  min-width: 30px;
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+.peak-meter {
+  height: 6px;
+  background: var(--color-border);
+  border-radius: var(--r-full);
+  overflow: hidden;
+  margin-bottom: 6px;
+}
+
+.peak-meter__bar {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(to right, var(--color-accent), var(--color-warning), var(--color-rec));
+  transition: width 50ms;
+}
+
+.audio-channel__fx {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.switch-inline {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: var(--fs-xs);
+  color: var(--color-text-secondary);
+  cursor: pointer;
+}
+
+.switch-inline input[type="checkbox"] {
+  accent-color: var(--color-primary);
+}
+
+.hint-text {
+  font-size: var(--fs-xs);
+  color: var(--color-text-tertiary);
+  font-style: italic;
+}
+
+/* ============================================================
+   SCENES & SOURCES
+   ============================================================ */
+.scene-list,
+.source-list {
+  list-style: none;
+  max-height: 150px;
+  overflow-y: auto;
+  border: 1px solid var(--color-border);
+  border-radius: var(--r-md);
+  margin-bottom: 4px;
+}
+
+.scene-item {
+  padding: 8px 10px;
+  font-size: var(--fs-sm);
+  cursor: pointer;
+  border-bottom: 1px solid var(--color-border);
+  transition: var(--transition-fast);
+}
+
+.scene-item:hover {
+  background: var(--color-surface-alt);
+}
+
+.scene-item.active {
+  background: var(--color-primary);
+  color: #fff;
+}
+
+.scene-controls {
+  display: flex;
+  gap: 4px;
+}
+
+.source-list li:not(.recording-list__empty) {
+  padding: 8px 10px;
+  font-size: var(--fs-xs);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.source-list li:not(.recording-list__empty)::before {
+  content: '▸';
+  margin-right: 4px;
+}
+
+/* ============================================================
+   STATISTICS DASHBOARD
+   ============================================================ */
+.stat-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+.stat-card {
+  background: var(--color-surface-alt);
+  padding: 12px 8px;
+  border-radius: var(--r-md);
+  text-align: center;
+  border: 1px solid var(--color-border);
+}
+
+.stat-card__value {
+  font-size: var(--fs-xl);
+  font-weight: 700;
+  color: var(--color-primary);
+  font-variant-numeric: tabular-nums;
+}
+
+.stat-card__label {
+  font-size: var(--fs-xs);
+  color: var(--color-text-tertiary);
+  margin-top: 2px;
+}
+
+.activity-chart {
+  display: flex;
+  align-items: flex-end;
+  height: 80px;
+  gap: 4px;
+  padding: 4px;
+  background: var(--color-surface-alt);
+  border-radius: var(--r-md);
+}
+
+.activity-bar {
+  flex: 1;
+  background: linear-gradient(to top, var(--color-primary), var(--color-accent));
+  border-radius: var(--r-sm) var(--r-sm) 0 0;
+  min-height: 4px;
+  transition: height 300ms;
+}
+
+/* ============================================================
+   SCHEDULED RECORDING
+   ============================================================ */
+.schedule-row {
+  display: flex;
+  gap: 4px;
+  margin-bottom: 4px;
+}
+
+.schedule-btn {
+  background: var(--color-primary);
+  color: #fff;
+  width: 30px;
+  border-radius: var(--r-sm);
+  font-size: 16px;
+}
+
+.schedule-list {
+  list-style: none;
+  max-height: 100px;
+  overflow-y: auto;
+}
+
+.schedule-list li:not(.recording-list__empty) {
+  padding: 6px 8px;
+  font-size: var(--fs-xs);
+  border-bottom: 1px solid var(--color-border);
+  display: flex;
+  justify-content: space-between;
+}
+
+/* ============================================================
+   THEME & ACCENT BUTTONS
+   ============================================================ */
+.theme-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 4px;
+}
+
+.theme-btn {
+  padding: 6px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--r-md);
+  background: var(--color-surface);
+  font-size: var(--fs-xs);
+  cursor: pointer;
+}
+
+.theme-btn.active {
+  border-color: var(--color-primary);
+  background: var(--color-primary-light);
+  color: var(--color-primary);
+}
+
+.accent-row {
+  display: flex;
+  gap: 4px;
+}
+
+.accent-btn {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  border: 2px solid var(--color-surface);
+  box-shadow: 0 0 0 1px var(--color-border);
+  cursor: pointer;
+}
+
+.accent-btn:hover {
+  transform: scale(1.1);
+}
+
+.accent-btn.active {
+  box-shadow: 0 0 0 2px var(--color-text);
+}
+
+/* ============================================================
+   HOTKEY REBIND
+   ============================================================ */
+.hotkey-list li kbd {
+  cursor: pointer;
+  transition: var(--transition-fast);
+}
+
+.hotkey-list li kbd:hover {
+  background: var(--color-primary);
+  color: #fff;
+}
+
+.hotkey-list li kbd.rebinding {
+  background: var(--color-warning);
+  color: #fff;
+  animation: pulse 1s infinite;
+}
+
+.hotkey-list li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width: 1100px) {
+  body {
+    grid-template-columns: var(--toolbar-w) 1fr 240px;
+  }
+  .tb-btn span {
+    display: none;
+  }
+}
+
+@media (max-width: 900px) {
+  body {
+    grid-template-columns: var(--toolbar-w) 1fr;
+  }
+  .panel--right {
+    display: none;
+  }
+}

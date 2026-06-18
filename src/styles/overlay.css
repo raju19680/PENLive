@@ -1,0 +1,96 @@
+/* ============================================================
+   PENLIVE - Overlay Mode Styles (Epic Pen style)
+   ============================================================ */
+
+/* When body has data-mode="overlay", everything becomes transparent
+   except the drawing canvas. The toolbar floats in a compact pill. */
+
+body[data-mode="overlay"] {
+  background: transparent !important;
+  pointer-events: none;
+}
+
+body[data-mode="overlay"] #board-canvas {
+  background: transparent !important;
+  background-image: none !important;
+  pointer-events: auto;
+}
+
+body[data-mode="overlay"] .overlay-floating-toolbar {
+  display: flex !important;
+}
+
+.overlay-floating-toolbar {
+  display: none;
+  position: fixed;
+  top: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(26, 35, 50, 0.92);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  padding: 6px 10px;
+  border-radius: 999px;
+  gap: 4px;
+  z-index: 9999;
+  pointer-events: auto;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.25);
+}
+
+.overlay-floating-toolbar button {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  color: #fff;
+  background: transparent;
+  transition: 120ms;
+}
+
+.overlay-floating-toolbar button:hover {
+  background: rgba(255,255,255,0.15);
+}
+
+.overlay-floating-toolbar button.active {
+  background: var(--color-primary);
+}
+
+.overlay-floating-toolbar .divider {
+  width: 1px;
+  height: 20px;
+  background: rgba(255,255,255,0.2);
+  margin: 0 4px;
+}
+
+.overlay-floating-toolbar input[type="color"] {
+  width: 24px;
+  height: 24px;
+  border: 2px solid #fff;
+  border-radius: 50%;
+  cursor: pointer;
+  padding: 0;
+  background: none;
+}
+
+/* Click-through hint at bottom */
+.overlay-hint {
+  display: none;
+  position: fixed;
+  bottom: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 6px 14px;
+  background: rgba(26, 35, 50, 0.85);
+  color: #fff;
+  font-size: 11px;
+  border-radius: 999px;
+  pointer-events: none;
+  z-index: 9999;
+  backdrop-filter: blur(8px);
+}
+
+body[data-mode="overlay"] .overlay-hint {
+  display: block;
+}

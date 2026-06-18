@@ -1,0 +1,293 @@
+/* ============================================================
+   PENLIVE - Dynamic Toolbar Styles
+   Copyright (c) 2026 Er. Raju Kumawat. All rights reserved.
+   ============================================================ */
+
+/* ============================================================
+   COLLAPSIBLE GROUP LABELS
+   ============================================================ */
+.toolbar__group-label {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  padding: 4px 6px;
+  border-radius: var(--r-sm);
+  transition: background 100ms;
+  user-select: none;
+}
+
+.toolbar__group-label:hover {
+  background: var(--color-surface-alt);
+  color: var(--color-primary) !important;
+}
+
+.group-collapse-icon {
+  font-size: 8px;
+  color: var(--color-text-tertiary);
+  transition: transform 200ms;
+}
+
+.toolbar__section.collapsed .tool-group,
+.toolbar__section.collapsed .color-picker,
+.toolbar__section.collapsed .brush-size {
+  display: none;
+}
+
+.toolbar__section.collapsed .toolbar__group-label {
+  opacity: 0.6;
+}
+
+.toolbar__section.collapsed .toolbar__group-label:hover {
+  opacity: 1;
+}
+
+/* Smooth collapse animation */
+.toolbar__section .tool-group,
+.toolbar__section .color-picker,
+.toolbar__section .brush-size {
+  transition: opacity 200ms;
+  overflow: hidden;
+}
+
+.toolbar__section.collapsed .tool-group,
+.toolbar__section.collapsed .color-picker,
+.toolbar__section.collapsed .brush-size {
+  max-height: 0;
+  opacity: 0;
+}
+
+/* Hidden group (completely removed) */
+.toolbar__section.group-hidden {
+  display: none !important;
+}
+
+/* ============================================================
+   DRAG-AND-DROP GROUP REORDERING
+   ============================================================ */
+.toolbar__group-label[draggable="true"] {
+  cursor: grab;
+}
+
+.toolbar__group-label[draggable="true"]:active {
+  cursor: grabbing;
+}
+
+.toolbar__section.dragging {
+  opacity: 0.4;
+}
+
+.toolbar__section.dragging .toolbar__group-label {
+  background: var(--color-primary);
+  color: #fff !important;
+}
+
+.toolbar__section.drag-over-top {
+  border-top: 3px solid var(--color-primary);
+  margin-top: -3px;
+}
+
+.toolbar__section.drag-over-bottom {
+  border-bottom: 3px solid var(--color-primary);
+  margin-bottom: -3px;
+}
+
+/* ============================================================
+   BOTTOM TOOLBAR DRAG-AND-DROP
+   ============================================================ */
+.btb-btn[draggable="true"] {
+  cursor: grab;
+}
+
+.btb-btn[draggable="true"]:active {
+  cursor: grabbing;
+}
+
+.btb-btn.dragging {
+  opacity: 0.4;
+}
+
+.btb-btn.drag-over-left {
+  border-left: 3px solid var(--color-primary);
+  margin-left: -3px;
+}
+
+.btb-btn.drag-over-right {
+  border-right: 3px solid var(--color-primary);
+  margin-right: -3px;
+}
+
+/* ============================================================
+   CUSTOMIZE PANEL
+   ============================================================ */
+.customize-panel {
+  position: fixed !important;
+  top: 80px;
+  right: 20px;
+  width: 280px;
+  max-height: 70vh;
+  overflow-y: auto;
+  z-index: 200;
+}
+
+.customize-panel h4 {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: var(--fs-md);
+  margin-bottom: 4px;
+}
+
+.customize-section {
+  margin-top: var(--sp-3);
+  padding-top: var(--sp-2);
+  border-top: 1px solid var(--color-border);
+}
+
+.customize-section strong {
+  display: block;
+  font-size: var(--fs-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--color-text-tertiary);
+  margin-bottom: 6px;
+}
+
+.customize-list {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.customize-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 8px;
+  background: var(--color-surface-alt);
+  border-radius: var(--r-sm);
+  font-size: var(--fs-sm);
+  color: var(--color-text);
+  cursor: pointer;
+  transition: background 100ms;
+}
+
+.customize-item:hover {
+  background: var(--color-primary-light);
+}
+
+.customize-item input[type="checkbox"] {
+  accent-color: var(--color-primary);
+  cursor: pointer;
+}
+
+.customize-drag {
+  cursor: grab;
+  color: var(--color-text-tertiary);
+  font-size: 14px;
+}
+
+.customize-drag:hover {
+  color: var(--color-primary);
+}
+
+.customize-actions {
+  display: flex;
+  gap: 4px;
+  margin-top: var(--sp-3);
+  padding-top: var(--sp-2);
+  border-top: 1px solid var(--color-border);
+}
+
+.customize-actions button {
+  flex: 1;
+  color: #fff;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+/* ============================================================
+   CUSTOMIZE BUTTON (in toolbar)
+   ============================================================ */
+.customize-btn {
+  margin-top: var(--sp-2);
+  opacity: 0.5;
+  transition: opacity 150ms;
+}
+
+.customize-btn:hover {
+  opacity: 1;
+  background: var(--color-primary-light);
+  color: var(--color-primary);
+}
+
+/* ============================================================
+   GROUP CONTEXT MENU (extends existing context-menu styles)
+   ============================================================ */
+.group-context-menu {
+  position: fixed;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--r-md);
+  box-shadow: var(--shadow-lg);
+  padding: 4px;
+  min-width: 200px;
+  z-index: 9999;
+  font-size: var(--fs-sm);
+  animation: menuIn 100ms ease-out;
+}
+
+.group-context-menu .context-menu__item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 10px;
+  border-radius: var(--r-sm);
+  cursor: pointer;
+  color: var(--color-text);
+  transition: background 100ms;
+}
+
+.group-context-menu .context-menu__item:hover {
+  background: var(--color-primary-light);
+  color: var(--color-primary);
+}
+
+.group-context-menu .context-menu__item-icon {
+  width: 18px;
+  text-align: center;
+  font-size: 12px;
+}
+
+.group-context-menu .context-menu__separator {
+  height: 1px;
+  background: var(--color-border);
+  margin: 4px 0;
+}
+
+.group-context-menu .context-menu__header {
+  padding: 6px 10px;
+  font-size: var(--fs-xs);
+  font-weight: 700;
+  color: var(--color-text-tertiary);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* ============================================================
+   DRAG GHOST (visual feedback)
+   ============================================================ */
+.drag-ghost {
+  position: fixed;
+  pointer-events: none;
+  background: var(--color-primary);
+  color: #fff;
+  padding: 6px 12px;
+  border-radius: var(--r-md);
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  z-index: 10000;
+  opacity: 0.9;
+  box-shadow: var(--shadow-lg);
+}

@@ -1,0 +1,283 @@
+/* ============================================================
+   PENLIVE - Window Controls & Menu Bar Styles
+   Copyright (c) 2026 Er. Raju Kumawat. All rights reserved.
+   ============================================================ */
+
+/* ============================================================
+   MENU BAR (File / Edit / View / Insert / Tools / Record / Help)
+   ============================================================ */
+.menubar {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  margin-left: 16px;
+  height: 100%;
+}
+
+.menubar__item {
+  position: relative;
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.menubar__item > span {
+  padding: 6px 10px;
+  font-size: var(--fs-sm);
+  color: var(--color-text);
+  cursor: pointer;
+  border-radius: var(--r-sm);
+  transition: background 100ms;
+  font-weight: 500;
+  user-select: none;
+}
+
+.menubar__item:hover > span,
+.menubar__item.open > span {
+  background: var(--color-surface-alt);
+}
+
+.menubar__dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  min-width: 220px;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--r-md);
+  box-shadow: var(--shadow-lg);
+  padding: 4px;
+  z-index: 1000;
+  display: none;
+  animation: menuIn 100ms ease-out;
+}
+
+@keyframes menuIn {
+  from { opacity: 0; transform: translateY(-4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.menubar__item.open .menubar__dropdown {
+  display: block;
+}
+
+.menubar__dropdown button {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 7px 10px;
+  font-size: var(--fs-sm);
+  color: var(--color-text);
+  border-radius: var(--r-sm);
+  cursor: pointer;
+  transition: background 100ms;
+  text-align: left;
+}
+
+.menubar__dropdown button:hover {
+  background: var(--color-primary-light);
+  color: var(--color-primary);
+}
+
+.menubar__dropdown button kbd {
+  font-size: 10px;
+  color: var(--color-text-tertiary);
+  background: transparent;
+  border: none;
+  padding: 0;
+  font-family: var(--font-mono);
+}
+
+.menubar__dropdown button:hover kbd {
+  color: var(--color-primary);
+}
+
+.menubar__separator {
+  height: 1px;
+  background: var(--color-border);
+  margin: 4px 8px;
+}
+
+/* ============================================================
+   WINDOW CONTROLS (Windows-style minimize / maximize / close)
+   ============================================================ */
+.window-controls {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  margin-left: 8px;
+  height: 100%;
+  border-left: 1px solid var(--color-border);
+  padding-left: 4px;
+}
+
+.wc-btn {
+  width: 36px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--r-sm);
+  color: var(--color-text);
+  background: transparent;
+  transition: background 100ms;
+}
+
+.wc-btn:hover {
+  background: var(--color-surface-alt);
+}
+
+.wc-btn--close:hover {
+  background: var(--color-rec);
+  color: #fff;
+}
+
+.wc-btn:active {
+  transform: scale(0.92);
+}
+
+/* ============================================================
+   FOCUS MODE (hide titlebar / toolbar / panel for distraction-free drawing)
+   ============================================================ */
+body.focus-mode .titlebar__center,
+body.focus-mode .menubar,
+body.focus-mode .titlebar__author {
+  display: none !important;
+}
+
+body.focus-mode .toolbar--left {
+  width: 44px;
+  overflow: hidden;
+}
+
+body.focus-mode .toolbar--left .toolbar__group-label,
+body.focus-mode .toolbar--left .brush-size,
+body.focus-mode .toolbar--left .color-picker .color-swatches,
+body.focus-mode .toolbar--left .color-picker .recent-colors,
+body.focus-mode .toolbar--left .color-picker #color-input {
+  display: none;
+}
+
+body.focus-mode .toolbar--left .tool-btn {
+  width: 32px;
+  height: 32px;
+}
+
+body.focus-mode .toolbar--left .tool-divider {
+  width: 60%;
+}
+
+body.focus-mode .panel--right {
+  width: 0;
+  border-left: none;
+  overflow: hidden;
+  transition: width 200ms;
+}
+
+body.focus-mode .canvas-area {
+  grid-column: 2 / -1;
+}
+
+body.focus-mode .bottom-toolbar {
+  bottom: 8px;
+  opacity: 0.4;
+  transition: opacity 200ms;
+}
+
+body.focus-mode .bottom-toolbar:hover {
+  opacity: 1;
+}
+
+body.focus-mode .statusbar {
+  opacity: 0.4;
+  transition: opacity 200ms;
+}
+
+body.focus-mode .statusbar:hover {
+  opacity: 1;
+}
+
+/* Focus mode indicator pill (top-center) */
+body.focus-mode .focus-mode-indicator {
+  display: flex;
+}
+
+.focus-mode-indicator {
+  display: none;
+  position: absolute;
+  top: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 4px 12px;
+  background: var(--color-text);
+  color: var(--color-surface);
+  font-size: var(--fs-xs);
+  border-radius: var(--r-full);
+  z-index: 100;
+  font-weight: 600;
+  align-items: center;
+  gap: 6px;
+}
+
+.focus-mode-indicator button {
+  color: var(--color-surface);
+  text-decoration: underline;
+  font-size: var(--fs-xs);
+}
+
+/* ============================================================
+   TITLE BAR (draggable region)
+   ============================================================ */
+.titlebar {
+  -webkit-app-region: drag;
+  user-select: none;
+}
+
+.titlebar button,
+.titlebar input,
+.titlebar .menubar__item,
+.titlebar .window-controls {
+  -webkit-app-region: no-drag;
+}
+
+/* When running in browser (no Tauri), still allow custom drag effect */
+.titlebar__left .titlebar__logo,
+.titlebar__left .titlebar__title {
+  cursor: grab;
+}
+
+body.dragging .titlebar {
+  cursor: grabbing;
+}
+
+/* ============================================================
+   RESPONSIVE TITLE BAR
+   ============================================================ */
+@media (max-width: 1280px) {
+  .menubar__item > span {
+    padding: 6px 8px;
+    font-size: var(--fs-xs);
+  }
+  .tb-btn span:not(#rec-label):not(#lang-label) {
+    display: none;
+  }
+}
+
+@media (max-width: 1100px) {
+  .menubar {
+    display: none; /* Hide menu bar on small screens — use bottom toolbar */
+  }
+  .titlebar__author {
+    display: none;
+  }
+}
+
+@media (max-width: 900px) {
+  .titlebar__center {
+    display: none;
+  }
+  .window-controls {
+    margin-left: 4px;
+  }
+}
